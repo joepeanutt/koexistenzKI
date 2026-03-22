@@ -1,0 +1,13 @@
+:root {
+    --theme-color: #e53e3e;
+    --theme-bg: linear-gradient(135deg, #e53e3e 0%, #4a5568 100%);
+}
+.hero {
+    background: var(--theme-bg) !important;
+}
+.content-card {
+    border-left: 5px solid var(--theme-color);
+}
+.app-card:hover {
+    box-shadow: 0 10px 25px rgba(229, 62, 62, 0.3);
+}

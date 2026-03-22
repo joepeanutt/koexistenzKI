@@ -1,0 +1,28 @@
+{
+  "name": "ki-chatbot-backend",
+  "version": "1.0.0",
+  "description": "Backend für KI-Chatbot mit OpenAI Integration",
+  "main": "backend.js",
+  "scripts": {
+    "start": "node backend.js",
+    "dev": "nodemon backend.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "ki",
+    "chatbot",
+    "openai",
+    "express"
+  ],
+  "author": "KI-Seminarprojekt",
+  "license": "MIT",
+  "type": "commonjs"
+}

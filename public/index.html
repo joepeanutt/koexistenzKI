@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KI & Un/Frieden | Seminarkurs</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="home-theme">
+    <div id="scroll-progress"></div>
+    <nav class="navbar">
+      <div class="container">
+        <h1 class="logo">
+          <span class="logo-icon" aria-label="Roboter" title="KI Roboter">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:8px;">
+              <rect x="6" y="10" width="20" height="14" rx="6" fill="#6C63FF"/>
+              <rect x="12" y="20" width="8" height="6" rx="2" fill="#FFD966"/>
+              <circle cx="11" cy="17" r="2" fill="#fff"/>
+              <circle cx="21" cy="17" r="2" fill="#fff"/>
+              <rect x="14.5" y="6" width="3" height="4" rx="1.5" fill="#6C63FF"/>
+              <rect x="4" y="14" width="2" height="6" rx="1" fill="#6C63FF"/>
+              <rect x="26" y="14" width="2" height="6" rx="1" fill="#6C63FF"/>
+            </svg>
+          </span>
+          Un/Frieden und KI
+        </h1>
+        <div class="nav-right">
+          <div class="hamburger" id="hamburger" aria-label="Menü öffnen/schließen">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li class="dropdown" id="dropdown">
+            <a href="#" class="dropdown-trigger">
+              Themen <span class="arrow">▼</span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="./arbeitswelt/arbeitswelt.html">Arbeitswelt</a></li>
+              <li><a href="./politik/politik.html">Politik</a></li>
+              <li><a href="./ueberwachung/ueberwachung.html">Überwachung</a></li>
+              <li><a href="./bildung/bildung.html">Bildung</a></li>
+            </ul>
+          </li>
+          <li><a href="./interviews/interviews.html">Interviews</a></li>
+          <li><button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">🌙</button></li>
+        </ul>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="matrix-rain"></div>
+      <!-- Matrix-Background für Hero -->
+      <canvas id="matrix-bg" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0.18;"></canvas>
+      <div class="container">
+        <h2>Koexistenz mit der Künstlichen Intelligenz</h2>
+        <p>
+          Ein Seminarkurs Projekt über die gesellschaftlichen Auswirkungen von
+          Künstlicher Intelligenz auf die Gesellschaft
+        </p>
+        <div class="hero-actions">
+          <a class="timeline-button" href="./timeline/zeitstrahl.html">🤖 KI Geschichte</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="content-card">
+        <h3>Über das Projekt</h3>
+        <p>
+          Künstliche Intelligenz ist heute ein fester Bestandteil unseres
+          Alltags – oft ohne dass wir es merken. In diesem Seminarprojekt
+          beschäftigen wir uns mit den Grundlagen von KI, ihren
+          Einsatzmöglichkeiten sowie den Chancen und Risiken, die sie mit sich
+          bringt. Unser Ziel ist es, ein besseres Verständnis für diese
+          Technologie zu entwickeln und ihre Bedeutung für die Zukunft zu
+          erkennen.
+        </p>
+      </section>
+
+      <section class="ki-info-card">
+        <h3>Warum ist das Thema wichtig?</h3>
+        <p id="ki-text">
+          KI verändert bereits heute viele Bereiche unseres Lebens – von der
+          Schule über die Arbeitswelt bis hin zur Medizin. Sie bietet große
+          Chancen, bringt aber auch Herausforderungen mit sich, wie Datenschutz,
+          ethische Fragen oder den Wandel von Berufen. Deshalb ist es wichtig,
+          sich frühzeitig mit diesem Thema auseinanderzusetzen.
+        </p>
+      </section>
+
+      <section class="applications-section">
+        <h3>KI in der Gesellschaft</h3>
+        <div class="app-cards">
+          <div class="app-card" data-info="KI kann große Datenmengen in Echtzeit auswerten, um Muster zu erkennen und Sicherheit zu erhöhen. Sie wird z.B. in der Videoüberwachung, bei Gesichtserkennung und zur Betrugsprävention eingesetzt.">
+            <h4>Überwachung</h4>
+            <p>KI unterstützt bei der Überwachung und Analyse von Daten.</p>
+            <div class="app-card-info">KI kann große Datenmengen in Echtzeit auswerten, um Muster zu erkennen und Sicherheit zu erhöhen. Sie wird z.B. in der Videoüberwachung, bei Gesichtserkennung und zur Betrugsprävention eingesetzt.</div>
+          </div>
+          <div class="app-card" data-info="In der Politik hilft KI bei der Auswertung von Stimmungsbildern, Wahlprognosen und der Analyse gesellschaftlicher Trends. Sie kann Entscheidungsprozesse unterstützen, birgt aber auch Risiken für Manipulation.">
+            <h4>Politik</h4>
+            <p>KI unterstützt bei politischen Entscheidungen und Analysen.</p>
+            <div class="app-card-info">In der Politik hilft KI bei der Auswertung von Stimmungsbildern, Wahlprognosen und der Analyse gesellschaftlicher Trends. Sie kann Entscheidungsprozesse unterstützen, birgt aber auch Risiken für Manipulation.</div>
+          </div>
+          <div class="app-card" data-info="KI ermöglicht personalisiertes Lernen, automatische Bewertung und intelligente Nachhilfe. Sie kann Lerninhalte anpassen und Lehrkräfte entlasten, aber auch Datenschutzfragen aufwerfen.">
+            <h4>Bildung</h4>
+            <p>Personalisierte Lernpläne und intelligente Tutoren.</p>
+            <div class="app-card-info">KI ermöglicht personalisiertes Lernen, automatische Bewertung und intelligente Nachhilfe. Sie kann Lerninhalte anpassen und Lehrkräfte entlasten, aber auch Datenschutzfragen aufwerfen.</div>
+          </div>
+          <div class="app-card" data-info="KI automatisiert Routineaufgaben, schafft neue Berufsbilder und verändert Arbeitsprozesse. Sie kann die Produktivität steigern, aber auch Arbeitsplätze ersetzen und neue Qualifikationen erfordern.">
+            <h4>Arbeitswelt</h4>
+            <p>Automatisierung von Routineaufgaben und neue Jobrollen.</p>
+            <div class="app-card-info">KI automatisiert Routineaufgaben, schafft neue Berufsbilder und verändert Arbeitsprozesse. Sie kann die Produktivität steigern, aber auch Arbeitsplätze ersetzen und neue Qualifikationen erfordern.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <section class="about-us-section">
+      <div class="container">
+        <h3>Über uns</h3>
+        <p>
+          Wir haben uns im Rahmen eines Seminars
+          intensiv mit dem Thema Künstliche Intelligenz beschäftigt. Gemeinsam
+          recherchieren wir, diskutieren verschiedene Perspektiven und
+          präsentieren unsere Ergebnisse auf dieser Website.
+        </p>
+      </div>
+    </section>
+
+    <footer class="team-footer">
+      <div class="container">
+        <h3 style="text-align:center; margin-bottom: 32px;">Unser Team</h3>
+        <div class="team-members">
+          <div class="member">
+            <div class="avatar animated-avatar">
+              <svg viewBox="0 0 64 64" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="20" r="12" fill="#6C63FF"/>
+                <ellipse cx="32" cy="48" rx="18" ry="10" fill="#6C63FF"/>
+                <circle class="avatar-hand" cx="48" cy="20" r="4" fill="#FFD966"/>
+              </svg>
+            </div>
+            <p>Berat Ayhan</p>
+          </div>
+          <div class="member">
+            <div class="avatar animated-avatar">
+              <svg viewBox="0 0 64 64" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="20" r="12" fill="#FF6584"/>
+                <ellipse cx="32" cy="48" rx="18" ry="10" fill="#FF6584"/>
+                <circle class="avatar-hand" cx="48" cy="20" r="4" fill="#FFD966"/>
+              </svg>
+            </div>
+            <p>Raul Bugnar</p>
+          </div>
+          <div class="member">
+            <div class="avatar animated-avatar">
+              <svg viewBox="0 0 64 64" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="20" r="12" fill="#43E6B0"/>
+                <ellipse cx="32" cy="48" rx="18" ry="10" fill="#43E6B0"/>
+                <circle class="avatar-hand" cx="48" cy="20" r="4" fill="#FFD966"/>
+              </svg>
+            </div>
+            <p>Henrik Schnetzer</p>
+          </div>
+          <div class="member">
+            <div class="avatar animated-avatar">
+              <svg viewBox="0 0 64 64" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="20" r="12" fill="#FFA500"/>
+                <ellipse cx="32" cy="48" rx="18" ry="10" fill="#FFA500"/>
+                <circle class="avatar-hand" cx="48" cy="20" r="4" fill="#FFD966"/>
+              </svg>
+            </div>
+            <p>Joel Stamler</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); text-align: center; font-size: 0.9rem;">
+          <p>&copy; 2026 KI & Un/Frieden Seminarkurs. Alle Rechte vorbehalten.</p>
+          <div style="margin-top: 10px;">
+            <a href="./impressum.html" style="color: #cbd5e0; text-decoration: none; margin: 0 10px;">Impressum</a> | 
+            <a href="./datenschutz.html" style="color: #cbd5e0; text-decoration: none; margin: 0 10px;">Datenschutz</a> | 
+            <a href="./nutzungsbedingungen.html" style="color: #cbd5e0; text-decoration: none; margin: 0 10px;">Nutzungsbedingungen</a> | 
+            <a href="./cookies.html" style="color: #cbd5e0; text-decoration: none; margin: 0 10px;">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Cookie-Zustimmung">
+      <div class="cookie-content">
+        <h3>🍪 Cookies & Datenschutz</h3>
+        <p>
+          Wir verwenden Cookies, um deine Einstellungen (z.B. Dark Mode) zu speichern und die Website zu verbessern.
+          Unsere Cookies ermöglichen personalisierte Inhalte und Analysen. 
+          Mehr Infos in der <a href="datenschutz.html" style="color: #2b6cb0; text-decoration: underline;">Datenschutzerklärung</a>.</p>
+        <div class="cookie-buttons">
+          <button id="cookie-reject" class="cookie-btn cookie-btn-secondary">Ablehnen</button>
+          <button id="cookie-accept" class="cookie-btn cookie-btn-primary">Akzeptieren</button>
+        </div>
+        <p class="cookie-info">
+          <a href="#" id="cookie-more-info">Mehr Informationen</a> | 
+          <a href="cookies.html">Cookie-Richtlinie</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Cookie Settings Modal -->
+    <div id="cookie-modal" class="cookie-modal hidden" role="dialog" aria-label="Cookie-Einstellungen">
+      <div class="cookie-modal-content">
+        <button class="cookie-modal-close" id="cookie-modal-close" aria-label="Schließen">&times;</button>
+        <h2>Cookie-Einstellungen</h2>
+        
+        <div class="cookie-group">
+          <h3>Erforderliche Cookies</h3>
+          <p>Diese Cookies sind notwendig für die Funktionalität der Website.</p>
+          <label>
+            <input type="checkbox" id="cookie-essential" checked disabled />
+            Erforderliche Cookies (immer aktiv)
+          </label>
+        </div>
+
+        <div class="cookie-group">
+          <h3>Funktionale Cookies</h3>
+          <p>Diese Cookies speichern deine Einstellungen (z.B. Dark Mode, Spracheinstellung).</p>
+          <label>
+            <input type="checkbox" id="cookie-functional" />
+            Funktionale Cookies
+          </label>
+        </div>
+
+        <div class="cookie-group">
+          <h3>Analyse-Cookies</h3>
+          <p>Diese Cookies helfen uns, die Website zu verbessern.</p>
+          <label>
+            <input type="checkbox" id="cookie-analytics" />
+            Analyse-Cookies
+          </label>
+        </div>
+
+        <div class="cookie-actions">
+          <button id="cookie-settings-reject" class="cookie-btn cookie-btn-secondary">Alle ablehnen</button>
+          <button id="cookie-settings-save" class="cookie-btn cookie-btn-primary">Einstellungen speichern</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-widget">
+      <div id="chatbot-icon" onclick="toggleChatbot()" aria-label="Chatbot öffnen" title="KI-Assistent öffnen">
+        <svg viewBox="0 0 64 64" width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="12" y="18" width="40" height="30" rx="12" fill="url(#botGrad)"/>
+          <rect x="26" y="10" width="12" height="8" rx="4" fill="#97a4ff"/>
+          <circle cx="25" cy="33" r="4" fill="#ffffff"/>
+          <circle cx="39" cy="33" r="4" fill="#ffffff"/>
+          <rect x="24" y="41" width="16" height="4" rx="2" fill="#dbe5ff"/>
+          <circle cx="25" cy="33" r="1.5" fill="#3850ff"/>
+          <circle cx="39" cy="33" r="1.5" fill="#3850ff"/>
+          <defs>
+            <linearGradient id="botGrad" x1="12" y1="18" x2="52" y2="48" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#8A7CFF"/>
+              <stop offset="1" stop-color="#38B6FF"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div id="chatbot-window" class="hidden">
+        <div id="chatbot-header">
+          <span>🤖 KI-Assistent</span>
+          <button id="chatbot-close" onclick="toggleChatbot()">✕</button>
+        </div>
+        <div id="chatbot-messages">
+          <div class="chat-message bot">Hallo! Ich bin euer KI-Assistent. Frag mich alles über KI & Un/Frieden! 😊</div>
+        </div>
+        <div id="chatbot-input-area">
+          <input 
+            id="chatbot-input" 
+            type="text" 
+            placeholder="Schreibe eine Nachricht..."
+            onkeypress="if(event.key==='Enter') sendChatMessage()"
+          />
+          <button id="chatbot-send" onclick="sendChatMessage()">➤</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+    <script src="./chatbot/chatbot.js"></script>
+  </body>
+</html>

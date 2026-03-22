@@ -1,0 +1,58 @@
+/* Interviews Page Custom Styles */
+.hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+}
+
+
+
+/* Nutze die globalen CSS-Variablen für Farben und Hintergründe */
+.content-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--card-shadow);
+  color: var(--text-color);
+  :root {
+    --theme-color: #667eea;
+    --theme-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  .hero {
+    background: var(--theme-bg) !important;
+    color: #fff;
+  }
+  .content-card {
+    border-left: 5px solid var(--theme-color);
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 32px;
+    margin-bottom: 32px;
+  }
+  #interview-list {
+    margin-top: 24px;
+  }
+  .interview-item {
+    background: #f5f7fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 4px rgba(102,126,234,0.08);
+  }
+  .interview-item h4 {
+    margin: 0 0 8px 0;
+    color: var(--theme-color);
+  }
+
+  .dark-mode .interview-item h4 {
+    color: #111;
+  }
+  .interview-item p {
+    margin: 0;
+    color: #333;
+  }
+  #video-list video {
+    display: block;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(102,126,234,0.12);
+  }
