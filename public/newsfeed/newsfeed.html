@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KI Newsfeed</title>
+    <link rel="stylesheet" href="./newsfeed.css" />
+  </head>
+  <body>
+    <div class="news-page">
+      <header class="news-hero">
+        <a class="back-home" href="../index.html">← Zurück zur Hauptseite</a>
+        <p class="news-kicker">Live-Updates</p>
+        <h1>Künstliche Intelligenz: Aktuelle News</h1>
+        <p class="news-subtitle">
+          Die neuesten Meldungen aus Google News (Deutsch), automatisch alle 5 Minuten aktualisiert.
+        </p>
+        <p class="last-updated" id="lastUpdated">Noch keine Aktualisierung</p>
+      </header>
+
+      <main class="news-main">
+        <section id="newsStatus" class="news-status" aria-live="polite"></section>
+        <section id="newsGrid" class="news-grid" aria-live="polite"></section>
+      </main>
+    </div>
+
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Zurück nach oben">
+      <span>Zurück nach oben</span>
+      <span class="back-to-top-icon" aria-hidden="true">&uarr;</span>
+    </button>
+
+    <script src="./newsfeed.js"></script>
+    <script src="../script.js"></script>
+  </body>
+</html>

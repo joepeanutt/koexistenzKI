@@ -213,32 +213,130 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Aktiven Navigationspunkt markieren
+document.addEventListener('DOMContentLoaded', () => {
+    const navAnchors = document.querySelectorAll('.nav-links a[href]');
+    if (!navAnchors.length) return;
+
+    const normalizePath = (path) => {
+        if (!path) return '/';
+
+        let normalized;
+
+        try {
+            // Use URL to normalize the path relative to the current origin
+            const url = new URL(path, window.location.origin);
+            normalized = url.pathname;
+        } catch (e) {
+            // Fallback: assume `path` is already a pathname
+            normalized = path;
+        }
+
+        // Collapse multiple consecutive slashes into a single slash
+        normalized = normalized.replace(/\/{2,}/g, '/');
+
+        // Remove trailing slashes except for the root path
+        if (normalized.length > 1) {
+            normalized = normalized.replace(/\/+$/, '');
+        }
+
+        if (!normalized) normalized = '/';
+
+        // Treat `/index.html` (with or without trailing slash) as the directory root
+        if (normalized.endsWith('/index.html')) {
+            normalized = normalized.slice(0, -'/index.html'.length) || '/';
+        }
+        return normalized;
+    };
+
+    const currentPath = normalizePath(window.location.pathname);
+
+    navAnchors.forEach((anchor) => {
+        const href = anchor.getAttribute('href');
+        if (!href || href.startsWith('#')) return;
+
+        const absolutePath = new URL(href, window.location.href).pathname;
+        const linkPath = normalizePath(absolutePath);
+
+        if (linkPath === currentPath) {
+            anchor.classList.add('nav-active');
+
+            // Wenn ein Unterthema aktiv ist, auch den "Themen"-Trigger hervorheben.
+            const dropdown = anchor.closest('.dropdown');
+            if (dropdown) {
+                const dropdownTrigger = dropdown.querySelector('.dropdown-trigger');
+                if (dropdownTrigger) {
+                    dropdownTrigger.classList.add('nav-active');
+                }
+            }
+        }
+    });
+});
+
 // Dark Mode Toggle
 document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('darkModeToggle');
     const body = document.body;
 
-    // Load saved theme from Cookie und localStorage
+    // Standard = Dark Mode; nur Light Mode wenn User das explizit gewählt hat
     const darkModeCookie = CookieManager.getCookie('darkMode');
     const darkModeLocalStorage = localStorage.getItem('darkMode');
-    const isDarkMode = darkModeCookie === 'enabled' || darkModeLocalStorage === 'enabled';
+    const isLightMode = darkModeCookie === 'disabled' || darkModeLocalStorage === 'disabled';
+    const isDarkMode = !isLightMode;
 
     if (isDarkMode) {
         body.classList.add('dark-mode');
-        darkModeToggle.textContent = '☀️';
     }
+
+    if (!darkModeToggle) return;
+
+    const moonIcon = `
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M21 13.5A8.5 8.5 0 1 1 10.5 3a7 7 0 0 0 10.5 10.5z" fill="currentColor"></path>
+        </svg>
+    `;
+
+    const sunIcon = `
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
+            <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <line x1="12" y1="2" x2="12" y2="5"></line>
+                <line x1="12" y1="19" x2="12" y2="22"></line>
+                <line x1="2" y1="12" x2="5" y2="12"></line>
+                <line x1="19" y1="12" x2="22" y2="12"></line>
+                <line x1="4.9" y1="4.9" x2="7" y2="7"></line>
+                <line x1="17" y1="17" x2="19.1" y2="19.1"></line>
+                <line x1="17" y1="7" x2="19.1" y2="4.9"></line>
+                <line x1="4.9" y1="19.1" x2="7" y2="17"></line>
+            </g>
+        </svg>
+    `;
+
+    const updateThemeToggleIcon = (isDarkMode) => {
+        darkModeToggle.innerHTML = isDarkMode ? sunIcon : moonIcon;
+        darkModeToggle.setAttribute(
+            'aria-label',
+            isDarkMode ? 'Zum Light Mode wechseln' : 'Zum Dark Mode wechseln'
+        );
+        darkModeToggle.setAttribute(
+            'title',
+            isDarkMode ? 'Light Mode' : 'Dark Mode'
+        );
+    };
+
+    updateThemeToggleIcon(isDarkMode);
 
     darkModeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
         if (body.classList.contains('dark-mode')) {
             CookieManager.setCookie('darkMode', 'enabled', 365);
             localStorage.setItem('darkMode', 'enabled');
-            darkModeToggle.textContent = '☀️';
+            updateThemeToggleIcon(true);
             console.log('Dark Mode aktiviert (Cookie gespeichert)');
         } else {
             CookieManager.setCookie('darkMode', 'disabled', 365);
             localStorage.setItem('darkMode', 'disabled');
-            darkModeToggle.textContent = '🌙';
+            updateThemeToggleIcon(false);
             console.log('Dark Mode deaktiviert (Cookie gespeichert)');
         }
     });

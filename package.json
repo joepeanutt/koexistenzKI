@@ -2,15 +2,18 @@
   "name": "ki-chatbot-backend",
   "version": "1.0.0",
   "description": "Backend für KI-Chatbot mit OpenAI Integration",
-  "main": "backend.js",
+  "main": "chatbot/server.js",
   "scripts": {
-    "start": "node backend.js",
-    "dev": "nodemon backend.js"
+    "start": "node chatbot/server.js",
+    "dev": "nodemon chatbot/server.js"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^4.22.1",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.20.0",
     "node-fetch": "^2.7.0"
   },
   "devDependencies": {

@@ -64,6 +64,30 @@ body {
     overflow: visible;
 }
 
+.admin-entry-link {
+    color: #d7deea;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 0.95rem;
+    line-height: 1;
+    margin-left: -12px;
+    margin-right: 10px;
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.admin-entry-link:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.36);
+}
+
 
 .logo {
     font-size: 1.65rem;
@@ -175,29 +199,47 @@ body {
 
 /* Dark Mode Toggle */
 .dark-mode-toggle {
-    background: linear-gradient(135deg, #cbd5e0 0%, #a0aec0 100%);
-    border: none;
-    color: #1a202c;
-    padding: 8px;
+    background: linear-gradient(135deg, #f7fafc 0%, #e2e8f0 100%);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    color: #2d3748;
+    padding: 0;
     border-radius: 50%;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 16px;
-    width: 40px;
-    height: 40px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .dark-mode-toggle:hover {
-    background: linear-gradient(135deg, #a0aec0 0%, #718096 100%);
-    color: white;
-    transform: scale(1.1) rotate(10deg);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    animation: bounce 0.6s ease;
+    background: linear-gradient(135deg, #edf2f7 0%, #cbd5e0 100%);
+    transform: translateY(-1px) scale(1.06);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.dark-mode-toggle svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease, opacity 0.25s ease;
+}
+
+.dark-mode-toggle:hover svg {
+    transform: rotate(18deg) scale(1.08);
+}
+
+body.dark-mode .dark-mode-toggle {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #f6e05e;
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
 }
 
 @keyframes bounce {
@@ -349,6 +391,11 @@ body {
     margin-top: 28px;
     position: relative;
     z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .timeline-button {
@@ -370,6 +417,15 @@ body {
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 18px 34px rgba(108, 99, 255, 0.28);
     filter: brightness(1.05);
+}
+
+.news-button {
+    background: linear-gradient(135deg, #17c964 0%, #00a6ff 100%);
+    box-shadow: 0 12px 26px rgba(0, 166, 255, 0.24);
+}
+
+.news-button:hover {
+    box-shadow: 0 18px 34px rgba(23, 201, 100, 0.3);
 }
 
 
@@ -571,6 +627,10 @@ body {
     .navbar .container {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .admin-entry-link {
+        margin-bottom: 8px;
     }
 
     .nav-right {
@@ -1241,6 +1301,21 @@ body {
     border-color: rgba(125, 117, 255, 0.42);
 }
 
+.nav-links a.nav-active,
+.nav-links a.nav-active:hover {
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.92), rgba(29, 161, 242, 0.92));
+    border-color: rgba(171, 209, 255, 0.78);
+    box-shadow: 0 8px 18px rgba(49, 119, 210, 0.32);
+}
+
+body.dark-mode .nav-links a.nav-active,
+body.dark-mode .nav-links a.nav-active:hover {
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(86, 98, 255, 0.95), rgba(38, 173, 255, 0.95));
+    border-color: rgba(181, 214, 255, 0.78);
+}
+
 .dropdown-menu {
     background: rgba(21, 24, 40, 0.98);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1256,31 +1331,41 @@ body {
     color: #ffffff;
 }
 
+/* Subseiten-Hero: hell im Light Mode */
 .hero {
     background:
-        radial-gradient(circle at 20% 20%, rgba(108, 99, 255, 0.28), transparent 36%),
-        radial-gradient(circle at 80% 0%, rgba(29, 161, 242, 0.22), transparent 34%),
-        linear-gradient(135deg, #121224 0%, #0f0f1a 100%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        radial-gradient(circle at 20% 20%, rgba(108, 99, 255, 0.14), transparent 38%),
+        radial-gradient(circle at 80% 0%, rgba(29, 161, 242, 0.12), transparent 36%),
+        linear-gradient(135deg, #dce6ff 0%, #eef2ff 100%);
+    border-bottom: 1px solid rgba(100, 120, 210, 0.2);
+    box-shadow: 0 8px 20px rgba(50, 80, 160, 0.12);
 }
 
+/* Subseiten-Hero Textfarbe im Light Mode */
+.hero h2,
+.hero p {
+    color: #1c2a4c;
+    text-shadow: none;
+}
+
+/* Karten: weiß/hell im Light Mode */
 .content-card,
 .ki-info-card,
 .app-card,
 .about-us-section,
 .member {
-    background: rgba(24, 24, 40, 0.88);
-    color: #f4f6fb;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.93);
+    color: #1b2340;
+    border: 1px solid rgba(100, 120, 210, 0.14);
+    box-shadow: 0 8px 24px rgba(27, 45, 95, 0.1);
+    backdrop-filter: blur(8px);
 }
 
 .content-card p,
 .ki-info-card p,
 .about-us-section p,
 .app-card p {
-    color: #b4bbd3;
+    color: #44537d;
 }
 
 .app-card h4,
@@ -1289,12 +1374,28 @@ body {
 .applications-section h3,
 .about-us-section h3,
 .member p {
-    color: #f4f6fb;
+    color: #1b2340;
 }
 
 .team-footer {
-    background: transparent;
-    border-top: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255, 255, 255, 0.6);
+    border-top: 1px solid rgba(100, 120, 210, 0.18);
+}
+
+/* Dark Mode: Subseiten-Hero wieder dunkel */
+body.dark-mode .hero {
+    background:
+        radial-gradient(circle at 20% 20%, rgba(108, 99, 255, 0.28), transparent 36%),
+        radial-gradient(circle at 80% 0%, rgba(29, 161, 242, 0.22), transparent 34%),
+        linear-gradient(135deg, #121224 0%, #0f0f1a 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: none;
+}
+
+body.dark-mode .hero h2,
+body.dark-mode .hero p {
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
 }
 
 body.dark-mode {
@@ -1343,7 +1444,13 @@ body.dark-mode .app-card,
 body.dark-mode .about-us-section,
 body.dark-mode .member {
     background: rgba(14, 16, 30, 0.9);
+    color: #f4f6fb;
     border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .team-footer {
+    background: transparent;
+    border-top-color: rgba(255, 255, 255, 0.12);
 }
 
 body.dark-mode .content-card h3,
