@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KI Quiz | Un/Frieden und KI</title>
+    <link rel="stylesheet" href="./quiz.css" />
+  </head>
+  <body>
+    <div class="quiz-page">
+      <header class="quiz-header">
+        <a class="back-link" href="../index.html">← Zurück zur Startseite</a>
+        <h1>🧠 KI Quiz</h1>
+        <p>10 Fragen von leicht bis schwer: Grundlagen, Tools und Technik.</p>
+      </header>
+
+      <main class="quiz-card" aria-live="polite">
+        <section id="quizStage">
+          <div class="quiz-progress-head">
+            <span id="progressLabel">Frage 1 von 10</span>
+            <span id="scoreLabel">Punkte: 0</span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-label="Quiz Fortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="10">
+            <div id="progressBar" class="progress-fill"></div>
+          </div>
+
+          <h2 id="questionText" class="question-text"></h2>
+          <div id="answers" class="answers" role="list"></div>
+
+          <div id="feedback" class="feedback hidden"></div>
+
+          <div class="quiz-actions">
+            <button id="nextButton" class="next-btn hidden" type="button">Nächste Frage</button>
+          </div>
+        </section>
+
+        <section id="resultStage" class="hidden">
+          <h2 class="result-title">Quiz abgeschlossen</h2>
+          <p id="finalScore" class="result-score"></p>
+          <p id="finalRating" class="result-rating"></p>
+          <button id="restartButton" class="restart-btn" type="button">Quiz neu starten</button>
+        </section>
+      </main>
+    </div>
+
+    <script src="./quiz.js"></script>
+  </body>
+</html>

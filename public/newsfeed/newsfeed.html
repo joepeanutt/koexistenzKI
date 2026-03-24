@@ -13,14 +13,85 @@
         <p class="news-kicker">Live-Updates</p>
         <h1>Künstliche Intelligenz: Aktuelle News</h1>
         <p class="news-subtitle">
-          Die neuesten Meldungen aus Google News (Deutsch), automatisch alle 5 Minuten aktualisiert.
+          Die neuesten Meldungen, automatisch alle 5 Minuten aktualisiert.
         </p>
         <p class="last-updated" id="lastUpdated">Noch keine Aktualisierung</p>
       </header>
 
       <main class="news-main">
+        <section class="market-section" id="marketSection" aria-live="polite">
+          <div class="market-head">
+            <h2>📈 KI Markt & Aktien</h2>
+            <p class="market-subline">Live-Kurse, 7-Tage-Trends und kompakte KI-Finanzmeldungen</p>
+          </div>
+
+          <div class="market-ticker-wrap" aria-label="Aktien Ticker">
+            <div class="market-ticker" id="marketTicker"></div>
+          </div>
+
+          <section class="market-cards" id="marketCards" aria-label="KI Aktien Übersicht"></section>
+
+          <section class="market-overview" aria-label="Markt Übersicht">
+            <article class="market-overview-card">
+              <p>KI Sektor Index</p>
+              <h3 id="aiSectorIndex">-</h3>
+            </article>
+            <article class="market-overview-card">
+              <p>Gesamtmarktkapitalisierung KI</p>
+              <h3 id="aiTotalMarketCap">-</h3>
+            </article>
+            <article class="market-overview-card">
+              <p>Gewinner des Tages</p>
+              <h3 id="aiTopWinner">-</h3>
+            </article>
+            <article class="market-overview-card">
+              <p>Verlierer des Tages</p>
+              <h3 id="aiTopLoser">-</h3>
+            </article>
+          </section>
+
+          <section class="market-news-box" aria-label="Markt News">
+            <div class="market-news-head">
+              <h3>💹 Markt News</h3>
+              <span id="marketNewsTimestamp">Wird geladen...</span>
+            </div>
+            <ul id="marketNewsList" class="market-news-list"></ul>
+          </section>
+        </section>
+
+        <div class="market-news-divider" role="separator" aria-label="Trennung Marktdaten und News">
+          <span>News Feed</span>
+        </div>
+
+        <div class="news-search-wrap">
+          <div class="news-search-container">
+            <input
+              type="text"
+              id="newsSearchInput"
+              class="news-search-input"
+              placeholder="Suche nach Themen..."
+              aria-label="News durchsuchen"
+            />
+            <button id="newsSearchClear" class="news-search-clear" aria-label="Suche zurücksetzen" title="Zurücksetzen">
+              ✕
+            </button>
+          </div>
+
+          <div class="news-sort-controls" role="group" aria-label="News sortieren">
+            <button class="sort-btn is-active" type="button" data-sort="newest">📅 Neueste</button>
+            <button class="sort-btn" type="button" data-sort="oldest">📆 Älteste</button>
+            <button class="sort-btn" type="button" data-sort="relevance">🔥 Relevanz</button>
+          </div>
+
+          <p id="searchResultsInfo" class="search-results-info"></p>
+        </div>
+
         <section id="newsStatus" class="news-status" aria-live="polite"></section>
         <section id="newsGrid" class="news-grid" aria-live="polite"></section>
+
+        <div class="news-load-more-wrap">
+          <button id="loadMoreNews" class="news-load-more" type="button">Mehr anzeigen</button>
+        </div>
       </main>
     </div>
 
@@ -29,6 +100,7 @@
       <span class="back-to-top-icon" aria-hidden="true">&uarr;</span>
     </button>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <script src="./newsfeed.js"></script>
     <script src="../script.js"></script>
   </body>

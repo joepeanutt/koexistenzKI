@@ -1,8 +1,32 @@
 let chatMessages = [];
 
 function toggleChatbot() {
-  const window = document.getElementById("chatbot-window");
-  window.classList.toggle("hidden");
+  const chatWindow = document.getElementById("chatbot-window");
+  const icon = document.getElementById("chatbot-icon");
+
+  if (!chatWindow) return;
+
+  if (icon) {
+    icon.classList.remove("press-pop");
+    // Reflow to restart animation on every click
+    void icon.offsetWidth;
+    icon.classList.add("press-pop");
+  }
+
+  const shouldOpen = chatWindow.classList.contains("hidden");
+
+  if (shouldOpen) {
+    chatWindow.classList.remove("hidden");
+    chatWindow.classList.remove("is-opening");
+    // Reflow to ensure the opening animation is replayed every time
+    void chatWindow.offsetWidth;
+    chatWindow.classList.add("is-opening");
+    window.setTimeout(() => {
+      chatWindow.classList.remove("is-opening");
+    }, 520);
+  } else {
+    chatWindow.classList.add("hidden");
+  }
 }
 
 async function sendChatMessage() {

@@ -193,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('nav-links');
     const dropdown = document.getElementById('dropdown');
+    const dropdownTrigger = dropdown ? dropdown.querySelector('.dropdown-trigger') : null;
     const dropdownMenu = dropdown ? dropdown.querySelector('.dropdown-menu') : null;
 
     if (hamburger) {
@@ -203,12 +204,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Dropdown für Mobilgeräte
-    if (dropdown) {
-        dropdown.addEventListener('click', (e) => {
+    if (dropdownTrigger) {
+        dropdownTrigger.addEventListener('click', (e) => {
             if (window.innerWidth <= 768) {
                 e.preventDefault();
                 dropdown.classList.toggle('active');
             }
+        });
+    }
+
+    if (dropdownMenu) {
+        dropdownMenu.querySelectorAll('a').forEach((anchor) => {
+            anchor.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    dropdown.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    if (hamburger) {
+                        hamburger.classList.remove('active');
+                    }
+                }
+            });
         });
     }
 });
@@ -339,6 +354,27 @@ document.addEventListener('DOMContentLoaded', () => {
             updateThemeToggleIcon(false);
             console.log('Dark Mode deaktiviert (Cookie gespeichert)');
         }
+    });
+});
+
+// Zurück nach oben Button (global)
+document.addEventListener('DOMContentLoaded', () => {
+    const backToTopBtn = document.getElementById('backToTop');
+    if (!backToTopBtn) return;
+
+    const toggleBackToTopVisibility = () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('is-visible');
+        } else {
+            backToTopBtn.classList.remove('is-visible');
+        }
+    };
+
+    window.addEventListener('scroll', toggleBackToTopVisibility, { passive: true });
+    toggleBackToTopVisibility();
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 });
 

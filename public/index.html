@@ -25,6 +25,7 @@
           Un/Frieden und KI
         </h1>
         <div class="nav-right">
+          <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">🌙</button>
           <div class="hamburger" id="hamburger" aria-label="Menü öffnen/schließen">
             <span></span>
             <span></span>
@@ -47,7 +48,6 @@
           </li>
           <li><a href="./interviews/interviews.html">🎤 Interviews</a></li>
           <li><a href="./newsfeed/newsfeed.html">📰 KI News</a></li>
-          <li><button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">🌙</button></li>
         </ul>
       </div>
     </nav>
@@ -68,50 +68,66 @@
       </div>
     </header>
 
+    <section class="quiz-teaser-section">
+      <div class="container quiz-teaser-content">
+        <h3>Teste dein KI-Wissen</h3>
+        <p>Von Grundlagen bis Algorithmen: 10 Fragen, direktes Feedback und Ergebnis am Ende.</p>
+        <a class="quiz-cta-button" href="./quiz/quiz.html">🧠 KI Quiz</a>
+      </div>
+    </section>
+
     <main class="container">
-      <section class="content-card">
-        <h3>Über das Projekt</h3>
-        <p>
-          Künstliche Intelligenz ist heute ein fester Bestandteil unseres
-          Alltags – oft ohne dass wir es merken. In diesem Seminarprojekt
-          beschäftigen wir uns mit den Grundlagen von KI, ihren
-          Einsatzmöglichkeiten sowie den Chancen und Risiken, die sie mit sich
-          bringt. Unser Ziel ist es, ein besseres Verständnis für diese
-          Technologie zu entwickeln und ihre Bedeutung für die Zukunft zu
-          erkennen.
-        </p>
+      <section class="content-card" data-icon="🚀">
+        <div class="content-card-content">
+          <h3>Über das Projekt</h3>
+          <p>
+            Künstliche Intelligenz ist heute ein fester Bestandteil unseres
+            Alltags – oft ohne dass wir es merken. In diesem Seminarprojekt
+            beschäftigen wir uns mit den Grundlagen von KI, ihren
+            Einsatzmöglichkeiten sowie den Chancen und Risiken, die sie mit sich
+            bringt. Unser Ziel ist es, ein besseres Verständnis für diese
+            Technologie zu entwickeln und ihre Bedeutung für die Zukunft zu
+            erkennen.
+          </p>
+        </div>
       </section>
 
-      <section class="ki-info-card">
-        <h3>Warum ist das Thema wichtig?</h3>
-        <p id="ki-text">
-          KI verändert bereits heute viele Bereiche unseres Lebens – von der
-          Schule über die Arbeitswelt bis hin zur Medizin. Sie bietet große
-          Chancen, bringt aber auch Herausforderungen mit sich, wie Datenschutz,
-          ethische Fragen oder den Wandel von Berufen. Deshalb ist es wichtig,
-          sich frühzeitig mit diesem Thema auseinanderzusetzen.
-        </p>
+      <section class="ki-info-card content-card" data-icon="🎯">
+        <div class="content-card-content">
+          <h3>Warum ist das Thema wichtig?</h3>
+          <p id="ki-text">
+            KI verändert bereits heute viele Bereiche unseres Lebens – von der
+            Schule über die Arbeitswelt bis hin zur Medizin. Sie bietet große
+            Chancen, bringt aber auch Herausforderungen mit sich, wie Datenschutz,
+            ethische Fragen oder den Wandel von Berufen. Deshalb ist es wichtig,
+            sich frühzeitig mit diesem Thema auseinanderzusetzen.
+          </p>
+        </div>
       </section>
 
       <section class="applications-section">
         <h3>KI in der Gesellschaft</h3>
         <div class="app-cards">
           <div class="app-card" data-info="KI kann große Datenmengen in Echtzeit auswerten, um Muster zu erkennen und Sicherheit zu erhöhen. Sie wird z.B. in der Videoüberwachung, bei Gesichtserkennung und zur Betrugsprävention eingesetzt.">
+            <span class="home-card-tag">Sicherheit</span>
             <h4>Überwachung</h4>
             <p>KI unterstützt bei der Überwachung und Analyse von Daten.</p>
             <div class="app-card-info">KI kann große Datenmengen in Echtzeit auswerten, um Muster zu erkennen und Sicherheit zu erhöhen. Sie wird z.B. in der Videoüberwachung, bei Gesichtserkennung und zur Betrugsprävention eingesetzt.</div>
           </div>
           <div class="app-card" data-info="In der Politik hilft KI bei der Auswertung von Stimmungsbildern, Wahlprognosen und der Analyse gesellschaftlicher Trends. Sie kann Entscheidungsprozesse unterstützen, birgt aber auch Risiken für Manipulation.">
+            <span class="home-card-tag">Demokratie</span>
             <h4>Politik</h4>
             <p>KI unterstützt bei politischen Entscheidungen und Analysen.</p>
             <div class="app-card-info">In der Politik hilft KI bei der Auswertung von Stimmungsbildern, Wahlprognosen und der Analyse gesellschaftlicher Trends. Sie kann Entscheidungsprozesse unterstützen, birgt aber auch Risiken für Manipulation.</div>
           </div>
           <div class="app-card" data-info="KI ermöglicht personalisiertes Lernen, automatische Bewertung und intelligente Nachhilfe. Sie kann Lerninhalte anpassen und Lehrkräfte entlasten, aber auch Datenschutzfragen aufwerfen.">
+            <span class="home-card-tag">Lernen</span>
             <h4>Bildung</h4>
             <p>Personalisierte Lernpläne und intelligente Tutoren.</p>
             <div class="app-card-info">KI ermöglicht personalisiertes Lernen, automatische Bewertung und intelligente Nachhilfe. Sie kann Lerninhalte anpassen und Lehrkräfte entlasten, aber auch Datenschutzfragen aufwerfen.</div>
           </div>
           <div class="app-card" data-info="KI automatisiert Routineaufgaben, schafft neue Berufsbilder und verändert Arbeitsprozesse. Sie kann die Produktivität steigern, aber auch Arbeitsplätze ersetzen und neue Qualifikationen erfordern.">
+            <span class="home-card-tag">Zukunft</span>
             <h4>Arbeitswelt</h4>
             <p>Automatisierung von Routineaufgaben und neue Jobrollen.</p>
             <div class="app-card-info">KI automatisiert Routineaufgaben, schafft neue Berufsbilder und verändert Arbeitsprozesse. Sie kann die Produktivität steigern, aber auch Arbeitsplätze ersetzen und neue Qualifikationen erfordern.</div>
@@ -251,7 +267,8 @@
 
     <!-- Chatbot Widget -->
     <div id="chatbot-widget">
-      <div id="chatbot-icon" onclick="toggleChatbot()" aria-label="Chatbot öffnen" title="KI-Assistent öffnen">
+      <button id="chatbot-icon" type="button" onclick="toggleChatbot()" aria-label="KI-Assistent öffnen" title="KI-Assistent öffnen">
+        <span id="chatbot-label">KI Assistent</span>
         <svg viewBox="0 0 64 64" width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect x="12" y="18" width="40" height="30" rx="12" fill="url(#botGrad)"/>
           <rect x="26" y="10" width="12" height="8" rx="4" fill="#97a4ff"/>
@@ -267,7 +284,7 @@
             </linearGradient>
           </defs>
         </svg>
-      </div>
+      </button>
       <div id="chatbot-window" class="hidden">
         <div id="chatbot-header">
           <span>🤖 KI-Assistent</span>
