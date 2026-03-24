@@ -62,3 +62,109 @@ body.dark-mode .interview-item {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(102, 126, 234, 0.12);
 }
+
+/* ========== RESPONSIVE INTERVIEW DESIGN ========== */
+@media (max-width: 768px) {
+  .content-card {
+    padding: 24px;
+    margin-bottom: 24px;
+    border-radius: 10px;
+    border-left-width: 4px;
+  }
+
+  .content-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .interview-item {
+    padding: 16px;
+    margin-bottom: 14px;
+    border-radius: 8px;
+  }
+
+  .interview-item h4 {
+    font-size: 1rem;
+  }
+
+  .interview-item p {
+    font-size: 0.9rem;
+  }
+
+  #video-list video {
+    margin-bottom: 16px;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .content-card {
+    padding: 18px;
+    margin-bottom: 18px;
+    border-left-width: 3px;
+  }
+
+  .content-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+  }
+
+  .content-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  #interview-list {
+    margin-top: 16px;
+  }
+
+  .interview-item {
+    padding: 14px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+  }
+
+  .interview-item h4 {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+
+  .interview-item p {
+    font-size: 0.85rem;
+  }
+
+  #video-list video {
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-card {
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+
+  .content-card h3 {
+    font-size: 1rem;
+  }
+
+  .content-card p {
+    font-size: 0.85rem;
+  }
+
+  .interview-item {
+    padding: 12px;
+    margin-bottom: 10px;
+  }
+
+  .interview-item h4 {
+    font-size: 0.9rem;
+  }
+
+  .interview-item p {
+    font-size: 0.8rem;
+  }
+
+  #video-list video {
+    margin-bottom: 10px;
+  }
+}

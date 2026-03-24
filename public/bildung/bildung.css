@@ -11,3 +11,44 @@
 .app-card:hover {
     box-shadow: 0 10px 25px rgba(56, 161, 105, 0.3);
 }
+
+/* ========== RESPONSIVE THEMENSEITE ========== */
+@media (max-width: 768px) {
+    .content-card {
+        border-left-width: 4px;
+        padding: 20px;
+    }
+
+    .app-card {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .content-card {
+        border-left-width: 3px;
+        padding: 16px;
+    }
+
+    .content-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .app-card {
+        padding: 14px;
+    }
+
+    .app-card h4 {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-card {
+        padding: 12px;
+    }
+
+    .app-card {
+        padding: 12px;
+    }
+}
