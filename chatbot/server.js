@@ -646,3 +646,9 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server läuft auf http://localhost:${PORT}`);
 });
+
+
+const apiKey = process.env.MAMMOUTH_API_KEY;
+if (!apiKey) {
+  console.warn('WARNUNG: MAMMOUTH_API_KEY fehlt in .env.local. Die Chat-Funktion wird nicht funktionieren.');
+}
