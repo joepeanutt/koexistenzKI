@@ -1,13 +1,108 @@
-// ===== NewsAPI.org Integration für KI News =====
-const NEWSAPI_KEY = '6503deb1d20846d2bd29d173f7f1c010';
-const NEWSAPI_ENDPOINT = 'https://newsapi.org/v2/everything';
-const API_PAGE_SIZE = 100;
+// ===== Serverseitiger RSS-Newsfeed fuer KI News =====
+const NEWS_ENDPOINT = '/api/news';
 const INITIAL_VISIBLE_COUNT = 9;
 const LOAD_STEP = 9;
 const SKELETON_COUNT = 9;
-const REFRESH_INTERVAL_MS = 15 * 60 * 1000; // 15 Minuten
+const REFRESH_INTERVAL_MS = 60 * 1000; // 1 Minute
+const VISIBILITY_REFRESH_THRESHOLD_MS = 45 * 1000;
 const CACHE_KEY = 'ai_news_cache';
 const CACHE_TIMESTAMP_KEY = 'ai_news_cache_timestamp';
+
+// Demo News Data für Schulprojekt
+const DEMO_ARTICLES = [
+  {
+    title: "Künstliche Intelligenz verändert die Arbeitswelt",
+    description: "Neue Studien zeigen, dass KI-Technologien 25 Millionen neue Jobs schaffen werden, während gleichzeitig 85 Millionen verschwinden könnten.",
+    content: "Eine neue Analyse von McKinsey Global Institute zeigt, dass Künstliche Intelligenz die globale Arbeitswelt tiefgreifend verändern wird.",
+    url: "https://example.com/ai-jobs",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%232b6cb0' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E🤖 KI und Arbeit%3C/text%3E%3C/svg%3E",
+    source: { id: "ai-news", name: "KI News" },
+    publishedAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+    author: "Tech-Redaktion"
+  },
+  {
+    title: "ChatGPT erreicht 100 Millionen Nutzer",
+    description: "OpenAI meldet einen Meilenstein: ChatGPT ist die schnellest wachsende Anwendung aller Zeiten.",
+    content: "Die KI-Anwendung ChatGPT hat in Rekordzeit 100 Millionen Nutzer erreicht.",
+    url: "https://example.com/chatgpt-milestone",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%2310a37f' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E💬 ChatGPT%3C/text%3E%3C/svg%3E",
+    source: { id: "openai", name: "OpenAI" },
+    publishedAt: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+    author: "KI-Experte"
+  },
+  {
+    title: "EU reguliert Künstliche Intelligenz",
+    description: "Das europäische Parlament verabschiedet strikte Regeln für KI-Systeme zum Schutz der Bürger.",
+    content: "Die EU führt einen umfassenden Regelwerk für Künstliche Intelligenz ein.",
+    url: "https://example.com/eu-ai-act",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%234a5568' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E⚖️ EU Regulierung%3C/text%3E%3C/svg%3E",
+    source: { id: "eu-news", name: "EU Nachrichten" },
+    publishedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+    author: "Politische Redaktion"
+  },
+  {
+    title: "Google DeepMind löst AlphaFold Problem",
+    description: "Künstliche Intelligenz hilft dabei, 3D-Strukturen von Proteinen zu bestimmen. Ein großer Durchbruch für die Biologie.",
+    content: "AlphaFold2 ist ein Meilenstein in der Biomolekularen Forschung.",
+    url: "https://example.com/alphafold",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%234285f4' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E🧬 AlphaFold%3C/text%3E%3C/svg%3E",
+    source: { id: "deepmind", name: "Google DeepMind" },
+    publishedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+    author: "Wissenschaft"
+  },
+  {
+    title: "Überwachung durch KI: Risiken und Chancen",
+    description: "Gesichtserkennung und KI-basierte Videoüberwachung werden immer häufiger eingesetzt. Experten warnen vor Datenschutzrisiken.",
+    content: "Die Verwendung von KI für Überwachungszwecke wird kontrovers diskutiert.",
+    url: "https://example.com/ai-surveillance",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%23d32f2f' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E📹 Überwachung%3C/text%3E%3C/svg%3E",
+    source: { id: "privacy", name: "Datenschutz News" },
+    publishedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
+    author: "Datenschutz-Experte"
+  },
+  {
+    title: "KI in der Bildung: Persönlicheres Lernen",
+    description: "Adaptive Lernsysteme mit KI helfen Schülern, schneller und effizienter zu lernen. Schulen experimentieren mit neuen Technologien.",
+    content: "Künstliche Intelligenz revolutioniert das Bildungssystem.",
+    url: "https://example.com/ai-education",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%239c27b0' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E🎓 Bildung%3C/text%3E%3C/svg%3E",
+    source: { id: "education", name: "Bildungs-News" },
+    publishedAt: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000).toISOString(),
+    author: "Bildungsexperte"
+  },
+  {
+    title: "Klimawandel: KI hilft bei Lösungen",
+    description: "Künstliche Intelligenz wird genutzt, um Klimamuster vorherzusagen und Energie zu sparen.",
+    content: "KI spielt eine wichtige Rolle im Kampf gegen den Klimawandel.",
+    url: "https://example.com/ai-climate",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%2300897b' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E🌍 Klima%3C/text%3E%3C/svg%3E",
+    source: { id: "climate", name: "Klima News" },
+    publishedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+    author: "Umweltjournalist"
+  },
+  {
+    title: "Ethik in der KI-Entwicklung",
+    description: "Unternehmen verpflichten sich zu ethischen Standards bei der KI-Entwicklung. Bias und Diskriminierung sollen verhindert werden.",
+    content: "Die ethische Entwicklung von KI ist ein zentrales Thema.",
+    url: "https://example.com/ai-ethics",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%23f57c00' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E⚖️ Ethik%3C/text%3E%3C/svg%3E",
+    source: { id: "ethics", name: "Ethik und KI" },
+    publishedAt: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000).toISOString(),
+    author: "Ethik-Experte"
+  },
+  {
+    title: "Robotik: KI in der realen Welt",
+    description: "Intelligente Roboter werden in Fabriken, Lagern und Hospitals eingesetzt. Die Automatisierung nimmt zu.",
+    content: "KI-gesteuerte Roboter verändern die Industrie.",
+    url: "https://example.com/ai-robotics",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%23fbc02d' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E🤖 Robotik%3C/text%3E%3C/svg%3E",
+    source: { id: "robotics", name: "Robotik News" },
+    publishedAt: new Date(Date.now() - 9 * 24 * 60 * 60 * 1000).toISOString(),
+    author: "Technologie-Reporter"
+  }
+];
+
+// ===== Original Code mit Fallback =====
 
 const newsGrid = document.getElementById('newsGrid');
 const newsStatus = document.getElementById('newsStatus');
@@ -25,6 +120,9 @@ let visibleCount = INITIAL_VISIBLE_COUNT;
 let currentSort = 'newest';
 let currentSearchQuery = '';
 let currentSearchScores = new Map();
+let isFetchingNews = false;
+let lastSuccessfulNewsFetchAt = 0;
+let newsRefreshTimerId = null;
 
 const relevanceKeywords = [
   'ki', 'künstliche intelligenz', 'artificial intelligence', 'ai',
@@ -162,6 +260,19 @@ const articleKey = (article, index = 0) => {
   return article.url || `${article.title || 'news'}-${article.publishedAt || '0'}-${index}`;
 };
 
+const escapeRegex = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+const containsKeyword = (text, keyword) => {
+  if (!text || !keyword) return false;
+
+  if (keyword.length <= 3) {
+    const pattern = new RegExp(`(^|[^a-z0-9äöüß])${escapeRegex(keyword)}($|[^a-z0-9äöüß])`, 'i');
+    return pattern.test(text);
+  }
+
+  return text.includes(keyword);
+};
+
 const computeTextRelevance = (article) => {
   const title = (article.title || '').toLowerCase();
   const desc = (article.description || '').toLowerCase();
@@ -170,9 +281,9 @@ const computeTextRelevance = (article) => {
 
   let score = 0;
   relevanceKeywords.forEach((keyword) => {
-    if (title.includes(keyword)) score += 10;
-    if (desc.includes(keyword)) score += 6;
-    if (fullText.includes(keyword)) score += 3;
+    if (containsKeyword(title, keyword)) score += 10;
+    if (containsKeyword(desc, keyword)) score += 6;
+    if (containsKeyword(fullText, keyword)) score += 3;
   });
 
   return score;
@@ -212,13 +323,28 @@ const createNewsCard = (article, animate = false, animationIndex = 0) => {
   };
   imageWrap.appendChild(img);
 
+  const imageShade = document.createElement('div');
+  imageShade.className = 'news-image-shade';
+  imageWrap.appendChild(imageShade);
+
+  const imageBadge = document.createElement('span');
+  imageBadge.className = 'news-image-badge';
+  imageBadge.textContent = article.source?.name || 'News';
+  imageWrap.appendChild(imageBadge);
+
   const body = document.createElement('div');
   body.className = 'news-card-body';
 
+  const metaRow = document.createElement('div');
+  metaRow.className = 'news-meta-row';
+
+  const sourceChip = document.createElement('span');
+  sourceChip.className = 'news-source-chip';
+  sourceChip.textContent = article.source?.name || 'Quelle unbekannt';
+
   const meta = document.createElement('p');
   meta.className = 'news-date';
-  const publisher = article.source?.name || 'Quelle unbekannt';
-  meta.textContent = `${formatRelativeDate(article.publishedAt)} · ${publisher}`;
+  meta.textContent = formatRelativeDate(article.publishedAt);
 
   const title = document.createElement('h2');
   title.className = 'news-title';
@@ -229,6 +355,9 @@ const createNewsCard = (article, animate = false, animationIndex = 0) => {
   const description = stripHtml(article.description || '');
   excerpt.textContent = truncate(description || 'Keine Beschreibung verfügbar.');
 
+  const footer = document.createElement('div');
+  footer.className = 'news-card-footer';
+
   const readButton = document.createElement('a');
   readButton.className = 'news-read';
   readButton.href = article.url || '#';
@@ -236,10 +365,14 @@ const createNewsCard = (article, animate = false, animationIndex = 0) => {
   readButton.rel = 'noopener noreferrer';
   readButton.textContent = 'Lesen →';
 
-  body.appendChild(meta);
+  metaRow.appendChild(sourceChip);
+  metaRow.appendChild(meta);
+
+  body.appendChild(metaRow);
   body.appendChild(title);
   body.appendChild(excerpt);
-  body.appendChild(readButton);
+  footer.appendChild(readButton);
+  body.appendChild(footer);
 
   card.appendChild(imageWrap);
   card.appendChild(body);
@@ -405,9 +538,9 @@ const searchArticlesWithScores = (query) => {
 
     let score = 0;
     expandedTerms.forEach((term) => {
-      if (titleLower.includes(term)) score += 10;
-      if (descLower.includes(term)) score += 5;
-      if (fullText.includes(term)) score += 2;
+      if (containsKeyword(titleLower, term)) score += 10;
+      if (containsKeyword(descLower, term)) score += 5;
+      if (containsKeyword(fullText, term)) score += 2;
 
       const similarity = fuzzySimilarity(fullText, term);
       if (similarity > 0.6) score += similarity * 3;
@@ -487,20 +620,52 @@ const updateLastUpdated = () => {
   lastUpdated.textContent = `Zuletzt aktualisiert: ${time} Uhr`;
 };
 
-// Lade News von NewsAPI.org
-const fetchNews = async () => {
-  setStatus('loading', 'News werden geladen...');
-  renderLoadingCards();
+const updateLastUpdatedFromTimestamp = (timestamp, suffix = '') => {
+  const date = new Date(timestamp || Date.now());
+  if (Number.isNaN(date.getTime())) {
+    updateLastUpdated();
+    return;
+  }
+
+  const time = new Intl.DateTimeFormat('de-DE', {
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(date);
+
+  lastUpdated.textContent = `Zuletzt aktualisiert: ${time} Uhr${suffix}`;
+};
+
+const buildNewsRequestUrl = () => {
+  const url = new URL(NEWS_ENDPOINT, window.location.origin);
+  url.searchParams.set('_ts', String(Date.now()));
+  return url.toString();
+};
+
+const needsFreshNews = () => {
+  if (!lastSuccessfulNewsFetchAt) return true;
+  return Date.now() - lastSuccessfulNewsFetchAt >= VISIBILITY_REFRESH_THRESHOLD_MS;
+};
+
+// Lade News ueber den eigenen Server-Endpoint
+const fetchNews = async ({ showLoadingState = false, resetVisible = false } = {}) => {
+  if (isFetchingNews) {
+    return;
+  }
+
+  isFetchingNews = true;
+
+  if (showLoadingState) {
+    setStatus('loading', 'News werden geladen...');
+    renderLoadingCards();
+  }
 
   try {
-    const url = new URL(NEWSAPI_ENDPOINT);
-    url.searchParams.append('q', 'artificial intelligence OR KI OR ChatGPT OR OpenAI');
-    url.searchParams.append('language', 'de');
-    url.searchParams.append('sortBy', 'publishedAt');
-    url.searchParams.append('pageSize', API_PAGE_SIZE);
-    url.searchParams.append('apiKey', NEWSAPI_KEY);
-
-    const response = await fetch(url.toString(), { cache: 'no-store' });
+    const response = await fetch(buildNewsRequestUrl(), {
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -519,17 +684,31 @@ const fetchNews = async () => {
     // Cache speichern
     try {
       localStorage.setItem(CACHE_KEY, JSON.stringify(data.articles));
-      localStorage.setItem(CACHE_TIMESTAMP_KEY, new Date().toISOString());
+      localStorage.setItem(CACHE_TIMESTAMP_KEY, data.fetchedAt || new Date().toISOString());
     } catch (e) {
       console.warn('Cache konnte nicht gespeichert werden:', e);
     }
 
     allArticles = decorateArticles(data.articles);
-    applyCurrentView({ resetVisible: true });
+    applyCurrentView({ resetVisible });
     setStatus('', '');
-    updateLastUpdated();
+    updateLastUpdatedFromTimestamp(data.fetchedAt, data.stale ? ' (letzte verfügbare Aktualisierung)' : '');
+    lastSuccessfulNewsFetchAt = new Date(data.fetchedAt || Date.now()).getTime();
   } catch (error) {
-    console.error('NewsAPI Fehler:', error.message);
+    console.error('Newsfeed Fehler:', error.message);
+
+    // Fallback: Demo-Daten für Schulprojekt verwenden
+    try {
+      console.warn('Nutze Demo-Daten für Newsfeed');
+      allArticles = decorateArticles(DEMO_ARTICLES);
+      applyCurrentView({ resetVisible });
+      setStatus('info', 'Demo-Meldungen werden angezeigt (Backend nicht erreichbar)');
+      updateLastUpdatedFromTimestamp(new Date().toISOString(), ' (Demo-Daten)');
+      lastSuccessfulNewsFetchAt = Date.now();
+      return;
+    } catch (demoError) {
+      console.error('Demo-Daten konnten nicht geladen werden:', demoError);
+    }
 
     // Versuche, gecachte News zu laden
     try {
@@ -537,16 +716,13 @@ const fetchNews = async () => {
       if (cachedArticles) {
         const articles = JSON.parse(cachedArticles);
         allArticles = decorateArticles(articles);
-        applyCurrentView({ resetVisible: true });
+        applyCurrentView({ resetVisible });
         const cachedTime = localStorage.getItem(CACHE_TIMESTAMP_KEY);
         if (cachedTime) {
-          const time = new Intl.DateTimeFormat('de-DE', {
-            hour: '2-digit',
-            minute: '2-digit'
-          }).format(new Date(cachedTime));
-          lastUpdated.textContent = `Zuletzt aktualisiert: ${time} Uhr (gecacht)`;
+          updateLastUpdatedFromTimestamp(cachedTime, ' (letzte verfügbare Aktualisierung)');
+          lastSuccessfulNewsFetchAt = new Date(cachedTime).getTime() || 0;
         }
-        setStatus('warning', 'Mit gecachten News, API-Verbindung fehlgeschlagen');
+        setStatus('', '');
         return;
       }
     } catch (cacheError) {
@@ -554,13 +730,49 @@ const fetchNews = async () => {
     }
 
     renderError(`News konnten nicht geladen werden: ${error.message}`);
+  } finally {
+    isFetchingNews = false;
   }
+};
+
+const scheduleNewsRefresh = () => {
+  if (newsRefreshTimerId) {
+    window.clearInterval(newsRefreshTimerId);
+  }
+
+  newsRefreshTimerId = window.setInterval(() => {
+    if (document.visibilityState !== 'visible' || !navigator.onLine) {
+      return;
+    }
+
+    fetchNews({ showLoadingState: false, resetVisible: false });
+  }, REFRESH_INTERVAL_MS);
+};
+
+const setupNewsAutoRefresh = () => {
+  scheduleNewsRefresh();
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && navigator.onLine && needsFreshNews()) {
+      fetchNews({ showLoadingState: false, resetVisible: false });
+    }
+  });
+
+  window.addEventListener('focus', () => {
+    if (navigator.onLine && needsFreshNews()) {
+      fetchNews({ showLoadingState: false, resetVisible: false });
+    }
+  });
+
+  window.addEventListener('online', () => {
+    fetchNews({ showLoadingState: false, resetVisible: false });
+  });
 };
 
 document.addEventListener('DOMContentLoaded', () => {
   setupNewsControls();
-  fetchNews();
-  window.setInterval(fetchNews, REFRESH_INTERVAL_MS);
+  fetchNews({ showLoadingState: true, resetVisible: true });
+  setupNewsAutoRefresh();
 });
 
 // ===== KI Markt & Aktien (Yahoo-only, ohne API Key) =====

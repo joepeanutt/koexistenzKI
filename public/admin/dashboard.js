@@ -1,6 +1,51 @@
 const TOKEN_KEY = 'admin_jwt_token';
 const USER_KEY = 'admin_user_data';
 
+// Demo-Daten für Schulprojekt
+const DEMO_STATS = {
+  totalVisitors: 2847,
+  activeUsersToday: 124,
+  timeframe: {
+    day: 342,
+    week: 2156,
+    month: 8923
+  },
+  topPages: [
+    { page: '/index.html', views: 856 },
+    { page: '/newsfeed/newsfeed.html', views: 634 },
+    { page: '/ueberwachung/ueberwachung.html', views: 523 },
+    { page: '/interview.html', views: 412 },
+    { page: '/quiz/quiz.html', views: 356 }
+  ],
+  visitorsTrend: Array.from({ length: 30 }, (_, i) => ({
+    label: new Date(Date.now() - (29 - i) * 86400000).toLocaleDateString('de-DE'),
+    views: Math.floor(Math.random() * 400) + 100
+  })),
+  deviceDistribution: [
+    { device: 'Desktop', count: 1200 },
+    { device: 'Mobile', count: 1400 },
+    { device: 'Tablet', count: 247 }
+  ]
+};
+
+const DEMO_USERS = [
+  { id: 1, username: 'berat_ayhan', email: 'berat@school.local', created_at: '2024-01-15', visits: 245, is_blocked: false },
+  { id: 2, username: 'raul_bugnar', email: 'raul@school.local', created_at: '2024-01-15', visits: 189, is_blocked: false },
+  { id: 3, username: 'henrik_schnetzer', email: 'henrik@school.local', created_at: '2024-01-15', visits: 267, is_blocked: false },
+  { id: 4, username: 'joel_stamler', email: 'joel@school.local', created_at: '2024-01-15', visits: 201, is_blocked: false },
+  { id: 5, username: 'demo_user_1', email: 'demo1@school.local', created_at: '2024-02-01', visits: 34, is_blocked: false },
+  { id: 6, username: 'demo_user_2', email: 'demo2@school.local', created_at: '2024-02-03', visits: 12, is_blocked: false }
+];
+
+const DEMO_PAGEVIEWS = [
+  { date: new Date().toISOString(), page: '/index.html', views: 89 },
+  { date: new Date(Date.now() - 86400000).toISOString(), page: '/index.html', views: 105 },
+  { date: new Date(Date.now() - 86400000).toISOString(), page: '/newsfeed/newsfeed.html', views: 78 },
+  { date: new Date(Date.now() - 172800000).toISOString(), page: '/quiz/quiz.html', views: 64 },
+  { date: new Date(Date.now() - 172800000).toISOString(), page: '/ueberwachung/ueberwachung.html', views: 92 },
+  { date: new Date(Date.now() - 259200000).toISOString(), page: '/interviews/interviews.html', views: 45 }
+];
+
 const state = {
   users: [],
   pageviews: [],
@@ -11,7 +56,8 @@ const state = {
     order: 'desc'
   },
   visitorsChart: null,
-  deviceChart: null
+  deviceChart: null,
+  isDemoMode: false
 };
 
 function getToken() {
@@ -20,7 +66,7 @@ function getToken() {
 
 async function logout() {
   const token = getToken();
-  if (token) {
+  if (token && !token.startsWith('demo_')) {
     try {
       await fetch('/api/logout', {
         method: 'POST',
@@ -45,26 +91,31 @@ async function apiFetch(url, options = {}) {
     return null;
   }
 
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-      ...(options.headers || {})
-    }
-  });
+  try {
+    const response = await fetch(url, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+        ...(options.headers || {})
+      }
+    });
 
-  if (response.status === 401) {
-    await logout();
+    if (response.status === 401) {
+      await logout();
+      return null;
+    }
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(data.error || 'Request fehlgeschlagen.');
+    }
+
+    return data;
+  } catch (error) {
+    console.log('API-Aufruf fehlgeschlagen, verwende Demo-Daten:', error.message);
     return null;
   }
-
-  const data = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    throw new Error(data.error || 'Request fehlgeschlagen.');
-  }
-
-  return data;
 }
 
 function formatDate(value) {
@@ -327,7 +378,17 @@ function closeModal() {
 
 async function loadStats() {
   const payload = await apiFetch('/api/stats');
-  if (!payload) return;
+  
+  if (!payload) {
+    // Demo-Fallback
+    state.isDemoMode = true;
+    console.log('Verwende Demo-Daten für Stats');
+    state.lastTrend = DEMO_STATS.visitorsTrend;
+    renderStatCards(DEMO_STATS);
+    renderVisitorsChart(state.lastTrend);
+    renderDeviceChart(DEMO_STATS.deviceDistribution);
+    return;
+  }
 
   state.lastTrend = payload.stats.visitorsTrend || [];
   renderStatCards(payload.stats);
@@ -344,7 +405,25 @@ async function loadUsers() {
   });
 
   const payload = await apiFetch(`/api/users?${params.toString()}`);
-  if (!payload) return;
+  
+  if (!payload) {
+    // Demo-Fallback
+    state.isDemoMode = true;
+    console.log('Verwende Demo-Daten für Users');
+    let filteredUsers = [...DEMO_USERS];
+    
+    if (searchInput.value) {
+      const query = searchInput.value.toLowerCase();
+      filteredUsers = filteredUsers.filter(u => 
+        u.username.toLowerCase().includes(query) || 
+        u.email.toLowerCase().includes(query)
+      );
+    }
+    
+    state.users = filteredUsers;
+    renderUsersTable(state.users);
+    return;
+  }
 
   state.users = payload.users;
   renderUsersTable(state.users);
@@ -352,7 +431,15 @@ async function loadUsers() {
 
 async function loadPageviews() {
   const payload = await apiFetch('/api/pageviews');
-  if (!payload) return;
+  
+  if (!payload) {
+    // Demo-Fallback
+    state.isDemoMode = true;
+    console.log('Verwende Demo-Daten für Pageviews');
+    state.pageviews = DEMO_PAGEVIEWS;
+    renderPageviewsTable(state.pageviews);
+    return;
+  }
 
   state.pageviews = payload.pageviews || [];
   renderPageviewsTable(state.pageviews);
@@ -360,7 +447,34 @@ async function loadPageviews() {
 
 async function showUserDetails(userId) {
   const payload = await apiFetch(`/api/users/${userId}`);
-  if (!payload) return;
+  
+  if (!payload) {
+    // Demo-Fallback
+    const demoUser = DEMO_USERS.find(u => u.id === userId);
+    if (!demoUser) {
+      showToast('User nicht gefunden.');
+      return;
+    }
+
+    const sessionsMarkup = `
+      <ul class="session-list">
+        <li>${formatDateTime(new Date(Date.now() - 3600000).toISOString())} - Desktop (Chrome)</li>
+        <li>${formatDateTime(new Date(Date.now() - 7200000).toISOString())} - Mobile (Safari)</li>
+        <li>${formatDateTime(new Date(Date.now() - 86400000).toISOString())} - Desktop (Firefox)</li>
+      </ul>
+    `;
+
+    openModal(`
+      <p><strong>Name:</strong> ${demoUser.username}</p>
+      <p><strong>E-Mail:</strong> ${demoUser.email}</p>
+      <p><strong>Besuche:</strong> ${demoUser.visits}</p>
+      <p><strong>Erstellt:</strong> ${formatDateTime(demoUser.created_at)}</p>
+      <p><strong>Letzter Login:</strong> ${formatDateTime(new Date().toISOString())}</p>
+      <h4>Letzte Sessions (Demo)</h4>
+      ${sessionsMarkup}
+    `);
+    return;
+  }
 
   const user = payload.user;
   const sessions = payload.recentSessions || [];

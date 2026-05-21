@@ -9,7 +9,7 @@
   <body class="home-theme">
     <div id="scroll-progress"></div>
     <nav class="navbar">
-      <div class="container">
+      <div class="container navbar-content">
         <h1 class="logo">
           <span class="logo-icon" aria-label="Roboter" title="KI Roboter">
             <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:8px;">
@@ -24,14 +24,6 @@
           </span>
           Un/Frieden und KI
         </h1>
-        <div class="nav-right">
-          <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">🌙</button>
-          <div class="hamburger" id="hamburger" aria-label="Menü öffnen/schließen">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
       
         <ul class="nav-links" id="nav-links">
           <li><a href="index.html">🏠 Home</a></li>
@@ -49,6 +41,19 @@
           <li><a href="./interviews/interviews.html">🎤 Interviews</a></li>
           <li><a href="./newsfeed/newsfeed.html">📰 KI News</a></li>
         </ul>
+
+        <div class="nav-right">
+          <div class="search-bar-wrapper">
+            <input type="text" id="nav-search" class="nav-search-input" placeholder="Durchsuchen..." aria-label="Website durchsuchen" />
+            <button class="search-btn" id="nav-search-btn" aria-label="Suche ausführen">🔍</button>
+          </div>
+          <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">🌙</button>
+          <div class="hamburger" id="hamburger" aria-label="Menü öffnen/schließen">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
       </div>
     </nav>
 
@@ -108,37 +113,76 @@
       <section class="applications-section">
         <h3>KI in der Gesellschaft</h3>
         <div class="app-cards">
-          <div class="app-card" data-info="KI kann große Datenmengen in Echtzeit auswerten, um Muster zu erkennen und Sicherheit zu erhöhen. Sie wird z.B. in der Videoüberwachung, bei Gesichtserkennung und zur Betrugsprävention eingesetzt.">
+          <a href="./ueberwachung/ueberwachung.html" class="app-card" data-info="KI kann große Datenmengen in Echtzeit auswerten, um Muster zu erkennen und Sicherheit zu erhöhen. Sie wird z.B. in der Videoüberwachung, bei Gesichtserkennung und zur Betrugsprävention eingesetzt.">
             <span class="home-card-tag">Sicherheit</span>
             <h4>Überwachung</h4>
             <p>KI unterstützt bei der Überwachung und Analyse von Daten.</p>
             <div class="app-card-info">KI kann große Datenmengen in Echtzeit auswerten, um Muster zu erkennen und Sicherheit zu erhöhen. Sie wird z.B. in der Videoüberwachung, bei Gesichtserkennung und zur Betrugsprävention eingesetzt.</div>
-          </div>
-          <div class="app-card" data-info="In der Politik hilft KI bei der Auswertung von Stimmungsbildern, Wahlprognosen und der Analyse gesellschaftlicher Trends. Sie kann Entscheidungsprozesse unterstützen, birgt aber auch Risiken für Manipulation.">
+          </a>
+          <a href="./politik/politik.html" class="app-card" data-info="In der Politik hilft KI bei der Auswertung von Stimmungsbildern, Wahlprognosen und der Analyse gesellschaftlicher Trends. Sie kann Entscheidungsprozesse unterstützen, birgt aber auch Risiken für Manipulation.">
             <span class="home-card-tag">Demokratie</span>
             <h4>Politik</h4>
             <p>KI unterstützt bei politischen Entscheidungen und Analysen.</p>
             <div class="app-card-info">In der Politik hilft KI bei der Auswertung von Stimmungsbildern, Wahlprognosen und der Analyse gesellschaftlicher Trends. Sie kann Entscheidungsprozesse unterstützen, birgt aber auch Risiken für Manipulation.</div>
-          </div>
-          <div class="app-card" data-info="KI ermöglicht personalisiertes Lernen, automatische Bewertung und intelligente Nachhilfe. Sie kann Lerninhalte anpassen und Lehrkräfte entlasten, aber auch Datenschutzfragen aufwerfen.">
+          </a>
+          <a href="./bildung/bildung.html" class="app-card" data-info="KI ermöglicht personalisiertes Lernen, automatische Bewertung und intelligente Nachhilfe. Sie kann Lerninhalte anpassen und Lehrkräfte entlasten, aber auch Datenschutzfragen aufwerfen.">
             <span class="home-card-tag">Lernen</span>
             <h4>Bildung</h4>
             <p>Personalisierte Lernpläne und intelligente Tutoren.</p>
             <div class="app-card-info">KI ermöglicht personalisiertes Lernen, automatische Bewertung und intelligente Nachhilfe. Sie kann Lerninhalte anpassen und Lehrkräfte entlasten, aber auch Datenschutzfragen aufwerfen.</div>
-          </div>
-          <div class="app-card" data-info="KI automatisiert Routineaufgaben, schafft neue Berufsbilder und verändert Arbeitsprozesse. Sie kann die Produktivität steigern, aber auch Arbeitsplätze ersetzen und neue Qualifikationen erfordern.">
+          </a>
+          <a href="./arbeitswelt/arbeitswelt.html" class="app-card" data-info="KI automatisiert Routineaufgaben, schafft neue Berufsbilder und verändert Arbeitsprozesse. Sie kann die Produktivität steigern, aber auch Arbeitsplätze ersetzen und neue Qualifikationen erfordern.">
             <span class="home-card-tag">Zukunft</span>
             <h4>Arbeitswelt</h4>
             <p>Automatisierung von Routineaufgaben und neue Jobrollen.</p>
             <div class="app-card-info">KI automatisiert Routineaufgaben, schafft neue Berufsbilder und verändert Arbeitsprozesse. Sie kann die Produktivität steigern, aber auch Arbeitsplätze ersetzen und neue Qualifikationen erfordern.</div>
-          </div>
+          </a>
         </div>
       </section>
     </main>
 
+    <section class="stats-section">
+      <div class="container">
+        <h3>Warum KI relevant ist</h3>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">73%</div>
+            <p>der Deutschen halten KI für wichtig</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2.5M</div>
+            <p>KI-bezogene Jobs weltweit bis 2025</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">500B$</div>
+            <p>KI-Marktvolumen im Jahr 2024</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">∞</div>
+            <p>Möglichkeiten für die Zukunft</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="call-to-action-section">
+      <div class="container">
+        <div class="cta-content">
+          <h3>Bereit, mehr über KI zu erfahren?</h3>
+          <p>Erkunde unsere verschiedenen Themenbereiche, stelle Fragen an unseren KI-Assistenten oder teste dein Wissen mit unserem Quiz.</p>
+          <div class="cta-buttons">
+            <a href="./quiz/quiz.html" class="cta-button primary">🧠 Quiz starten</a>
+            <a href="./newsfeed/newsfeed.html" class="cta-button secondary">📰 News lesen</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="container">
+
     <section class="about-us-section">
       <div class="container">
-        <h3>Über uns</h3>
+        <h3 class="about-title">Über unser Team</h3>
         <p>
           Wir haben uns im Rahmen eines Seminars
           intensiv mit dem Thema Künstliche Intelligenz beschäftigt. Gemeinsam
@@ -150,7 +194,7 @@
 
     <footer class="team-footer">
       <div class="container">
-        <h3 style="text-align:center; margin-bottom: 32px;">Unser Team</h3>
+        <h3 style="text-align:center; margin-bottom: 32px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: -0.02em;">Unser Team</h3>
         <div class="team-members">
           <div class="member">
             <div class="avatar animated-avatar">

@@ -520,3 +520,87 @@ document.head.appendChild(style);
   setInterval(draw, 55);
   resize();
 })();
+
+// ============================================
+// Suchfunktion für die Website
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('nav-search');
+    const searchBtn = document.getElementById('nav-search-btn');
+    
+    if (!searchInput || !searchBtn) return;
+    
+    // Searchable content structure
+    const searchablePages = [
+        { title: 'Home', url: 'index.html', keywords: ['home', 'startseite', 'hauptseite'] },
+        { title: 'Themen', url: '#themen', keywords: ['themen', 'kategorien', 'bereiche'] },
+        { title: 'Arbeitswelt', url: 'arbeitswelt/arbeitswelt.html', keywords: ['arbeit', 'arbeitswelt', 'job', 'beruf', 'employment'] },
+        { title: 'Politik', url: 'politik/politik.html', keywords: ['politik', 'regierung', 'demokratie', 'wahlen'] },
+        { title: 'Überwachung', url: 'ueberwachung/ueberwachung.html', keywords: ['überwachung', 'sicherheit', 'datenschutz', 'privacy'] },
+        { title: 'Bildung', url: 'bildung/bildung.html', keywords: ['bildung', 'schule', 'lernen', 'education', 'university'] },
+        { title: 'Interviews', url: 'interviews/interviews.html', keywords: ['interviews', 'gespräche', 'meinungen'] },
+        { title: 'KI News', url: 'newsfeed/newsfeed.html', keywords: ['news', 'nachrichten', 'feeds', 'aktuell'] },
+        { title: 'Quiz', url: 'quiz/quiz.html', keywords: ['quiz', 'test', 'fragen', 'wissen'] },
+        { title: 'Timeline', url: 'timeline/zeitstrahl.html', keywords: ['timeline', 'zeitstrahl', 'geschichte', 'history'] },
+        { title: 'Impressum', url: 'impressum.html', keywords: ['impressum', 'kontakt', 'verantwortlich'] },
+        { title: 'Datenschutz', url: 'datenschutz.html', keywords: ['datenschutz', 'privacy', 'daten', 'schutz'] },
+        { title: 'Nutzungsbedingungen', url: 'nutzungsbedingungen.html', keywords: ['nutzung', 'bedingungen', 'terms'] },
+        { title: 'Cookies', url: 'cookies.html', keywords: ['cookies', 'cookie-richtlinie', 'tracking'] }
+    ];
+    
+    const performSearch = (query) => {
+        if (!query.trim()) return [];
+        
+        const queryLower = query.toLowerCase();
+        const results = [];
+        
+        searchablePages.forEach(page => {
+            let score = 0;
+            
+            // Exact title match
+            if (page.title.toLowerCase() === queryLower) {
+                score += 100;
+            }
+            // Title includes query
+            else if (page.title.toLowerCase().includes(queryLower)) {
+                score += 50;
+            }
+            
+            // Keywords match
+            page.keywords.forEach(keyword => {
+                if (keyword.includes(queryLower)) {
+                    score += 25;
+                }
+                if (queryLower.includes(keyword.substring(0, 3))) {
+                    score += 10;
+                }
+            });
+            
+            if (score > 0) {
+                results.push({ ...page, score });
+            }
+        });
+        
+        // Sort by score
+        return results.sort((a, b) => b.score - a.score);
+    };
+    
+    const handleSearch = () => {
+        const query = searchInput.value;
+        const results = performSearch(query);
+        
+        if (results.length > 0) {
+            // Navigate to the top result
+            window.location.href = results[0].url;
+        } else {
+            alert('Keine Ergebnisse gefunden. Versuche ein anderes Suchtwort.');
+        }
+    };
+    
+    searchBtn.addEventListener('click', handleSearch);
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    });
+});

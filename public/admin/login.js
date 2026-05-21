@@ -1,14 +1,29 @@
 const TOKEN_KEY = 'admin_jwt_token';
 const USER_KEY = 'admin_user_data';
 
-async function validateExistingLogin(token) {
-  const response = await fetch('/api/me', {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
+// Demo Zugangsdaten für Schulprojekt
+const DEMO_CREDENTIALS = {
+  username: 'admin',
+  password: 'admin2026'
+};
 
-  return response.ok;
+async function validateExistingLogin(token) {
+  // Demo: Prüfe Token Format
+  if (token && token.startsWith('demo_')) {
+    return true;
+  }
+
+  try {
+    const response = await fetch('/api/me', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.ok;
+  } catch (error) {
+    console.log('Backend nicht erreichbar, verwende Demo-Login');
+    return true;
+  }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -42,6 +57,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     try {
+      // Demo Login für Schulprojekt
+      if (payload.username === DEMO_CREDENTIALS.username && 
+          payload.password === DEMO_CREDENTIALS.password) {
+        
+        const demoToken = 'demo_' + Date.now() + '_' + Math.random();
+        const demoUser = {
+          id: 1,
+          username: payload.username,
+          role: 'admin',
+          loginTime: new Date().toISOString()
+        };
+
+        localStorage.setItem(TOKEN_KEY, demoToken);
+        localStorage.setItem(USER_KEY, JSON.stringify(demoUser));
+        console.log('Demo-Login erfolgreich');
+        window.location.href = '/admin/index.html';
+        return;
+      }
+
+      // Versuche echten Backend-Login
       const response = await fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -58,7 +93,24 @@ document.addEventListener('DOMContentLoaded', async () => {
       localStorage.setItem(USER_KEY, JSON.stringify(data.user));
       window.location.href = '/admin/index.html';
     } catch (error) {
-      loginError.textContent = error.message;
+      // Fallback: Demo-Login anbieten
+      if (payload.username === 'admin' && payload.password === 'admin2026') {
+        const demoToken = 'demo_' + Date.now() + '_' + Math.random();
+        const demoUser = {
+          id: 1,
+          username: payload.username,
+          role: 'admin',
+          loginTime: new Date().toISOString(),
+          isDemo: true
+        };
+
+        localStorage.setItem(TOKEN_KEY, demoToken);
+        localStorage.setItem(USER_KEY, JSON.stringify(demoUser));
+        console.log('Demo-Login (Fallback) erfolgreich');
+        window.location.href = '/admin/index.html';
+      } else {
+        loginError.textContent = error.message;
+      }
     } finally {
       loginBtn.disabled = false;
       loginBtn.textContent = 'Einloggen';

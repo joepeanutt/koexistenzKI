@@ -4,6 +4,7 @@ const path = require('path');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const Parser = require('rss-parser');
 
 require('dotenv').config({ path: path.join(__dirname, '../.env.local') });
 
@@ -13,6 +14,49 @@ const app = express();
 const PORT = Number(process.env.PORT || 3000);
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '12h';
+const rssParser = new Parser({
+  customFields: {
+    item: [
+      ['content:encoded', 'contentEncoded'],
+      ['media:content', 'mediaContent', { keepArray: true }],
+      ['media:thumbnail', 'mediaThumbnail', { keepArray: true }]
+    ]
+  }
+});
+
+const NEWS_RESULT_LIMIT = 24;
+const NEWS_FETCH_TIMEOUT_MS = 12000;
+const NEWS_RSS_FEEDS = [
+  { name: 'heise online', url: 'https://www.heise.de/rss/heise-top-atom.xml' },
+  { name: 'Golem.de', url: 'https://rss.golem.de/rss.php?feed=RSS2.0' },
+  { name: 't3n', url: 'https://t3n.de/rss.xml' },
+  { name: 'ComputerBase', url: 'https://www.computerbase.de/rss/news.xml' }
+];
+const NEWS_KEYWORDS = [
+  'ki',
+  'künstliche intelligenz',
+  'kuenstliche intelligenz',
+  'artificial intelligence',
+  'ai',
+  'openai',
+  'chatgpt',
+  'anthropic',
+  'claude',
+  'gemini',
+  'copilot',
+  'deepmind',
+  'llm',
+  'large language model',
+  'machine learning',
+  'neural',
+  'nvidia',
+  'roboter',
+  'robotik',
+  'sprachmodell',
+  'deepfake',
+  'autonom'
+];
+let latestNewsPayload = null;
 
 if (!JWT_SECRET) {
   console.warn('WARNUNG: JWT_SECRET fehlt in .env.local');
@@ -62,6 +106,190 @@ function buildAuthToken(user) {
     JWT_SECRET,
     { expiresIn: JWT_EXPIRES_IN }
   );
+}
+
+function decodeHtmlEntities(value = '') {
+  return String(value)
+    .replace(/&amp;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/&nbsp;/gi, ' ')
+    .trim();
+}
+
+function stripHtml(value = '') {
+  return decodeHtmlEntities(String(value).replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
+}
+
+function toArray(value) {
+  if (!value) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
+function normalizeUrl(candidate, baseUrl) {
+  if (!candidate || typeof candidate !== 'string') return null;
+
+  try {
+    return new URL(candidate, baseUrl).toString();
+  } catch {
+    return null;
+  }
+}
+
+function extractImageFromHtml(html) {
+  if (!html || typeof html !== 'string') return null;
+  const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+  return match ? decodeHtmlEntities(match[1]) : null;
+}
+
+function extractImageUrl(item, feedUrl) {
+  const candidates = [
+    item.enclosure?.url,
+    ...toArray(item.mediaContent).map((entry) => entry?.$?.url || entry?.url),
+    ...toArray(item.mediaThumbnail).map((entry) => entry?.$?.url || entry?.url),
+    extractImageFromHtml(item.contentEncoded),
+    extractImageFromHtml(item.content),
+    extractImageFromHtml(item.summary),
+    extractImageFromHtml(item.description)
+  ];
+
+  for (const candidate of candidates) {
+    const normalized = normalizeUrl(candidate, feedUrl);
+    if (normalized) {
+      return normalized;
+    }
+  }
+
+  return null;
+}
+
+function escapeRegex(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function containsNewsKeyword(haystack, keyword) {
+  if (!haystack || !keyword) return false;
+
+  if (keyword.length <= 3) {
+    const pattern = new RegExp(`(^|[^a-z0-9äöüß])${escapeRegex(keyword)}($|[^a-z0-9äöüß])`, 'i');
+    return pattern.test(haystack);
+  }
+
+  return haystack.includes(keyword);
+}
+
+function scoreNewsArticle(article) {
+  const haystack = `${article.title} ${article.description} ${article.content}`.toLowerCase();
+
+  return NEWS_KEYWORDS.reduce((score, keyword) => {
+    if (!containsNewsKeyword(haystack, keyword)) {
+      return score;
+    }
+
+    if (containsNewsKeyword(article.title.toLowerCase(), keyword)) {
+      return score + 6;
+    }
+
+    return score + 2;
+  }, 0);
+}
+
+function normalizeNewsItem(item, feed) {
+  const title = stripHtml(item.title || '');
+  const description = stripHtml(item.contentSnippet || item.summary || item.description || item.contentEncoded || item.content || '');
+  const url = normalizeUrl(item.link || item.guid, feed.url);
+
+  if (!title || !url) {
+    return null;
+  }
+
+  const publishedAt = item.isoDate || item.pubDate || item.published || item.updated || null;
+  const article = {
+    title,
+    description,
+    content: description,
+    url,
+    urlToImage: extractImageUrl(item, feed.url),
+    publishedAt,
+    source: { name: feed.name }
+  };
+
+  return {
+    ...article,
+    __isPromotional: /^(anzeige|deal)\b/i.test(title),
+    __score: scoreNewsArticle(article)
+  };
+}
+
+function withTimeout(promise, timeoutMs, errorMessage) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => {
+      setTimeout(() => reject(new Error(errorMessage)), timeoutMs);
+    })
+  ]);
+}
+
+async function buildLatestNewsPayload() {
+  const feedResults = await Promise.allSettled(
+    NEWS_RSS_FEEDS.map(async (feed) => {
+      const parsedFeed = await withTimeout(
+        rssParser.parseURL(feed.url),
+        NEWS_FETCH_TIMEOUT_MS,
+        `Timeout beim Laden von ${feed.name}`
+      );
+
+      return { feed, items: parsedFeed.items || [] };
+    })
+  );
+
+  const successfulFeeds = feedResults
+    .filter((result) => result.status === 'fulfilled')
+    .map((result) => result.value);
+
+  if (!successfulFeeds.length) {
+    throw new Error('Die RSS-Feeds konnten nicht geladen werden.');
+  }
+
+  const deduplicatedArticles = new Map();
+
+  successfulFeeds.forEach(({ feed, items }) => {
+    items
+      .map((item) => normalizeNewsItem(item, feed))
+      .filter(Boolean)
+      .forEach((article) => {
+        if (!deduplicatedArticles.has(article.url)) {
+          deduplicatedArticles.set(article.url, article);
+        }
+      });
+  });
+
+  const articles = Array.from(deduplicatedArticles.values())
+    .filter((article) => !article.__isPromotional)
+    .filter((article) => article.__score > 0)
+    .sort((a, b) => {
+      const scoreDiff = b.__score - a.__score;
+      if (scoreDiff !== 0) {
+        return scoreDiff;
+      }
+
+      return new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime();
+    })
+    .slice(0, NEWS_RESULT_LIMIT)
+    .map(({ __isPromotional, __score, ...article }) => article);
+
+  if (!articles.length) {
+    throw new Error('Es wurden keine passenden KI-News in den RSS-Feeds gefunden.');
+  }
+
+  return {
+    status: 'ok',
+    articles,
+    fetchedAt: new Date().toISOString(),
+    sources: successfulFeeds.map(({ feed }) => feed.name)
+  };
 }
 
 function requireAuth(req, res, next) {
@@ -331,53 +559,31 @@ app.get('/api/pageviews', requireAuth, async (req, res) => {
   }
 });
 
-// API: The Guardian News
+// API: KI News aus deutschen RSS-Feeds (ohne API-Key)
 app.get('/api/news', async (req, res) => {
-  const apiKey = process.env.GUARDIAN_API_KEY;
-
-  if (!apiKey) {
-    return res.status(500).json({ error: 'GUARDIAN_API_KEY nicht konfiguriert' });
-  }
-
-  const params = new URLSearchParams({
-    q: 'artificial intelligence',
-    'show-fields': 'thumbnail,headline,trailText,byline',
-    'page-size': '12',
-    'order-by': 'newest',
-    'api-key': apiKey
+  res.set({
+    'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+    Pragma: 'no-cache',
+    Expires: '0',
+    'Surrogate-Control': 'no-store'
   });
 
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
-
-    const response = await fetch(`https://content.guardianapis.com/search?${params}`, {
-      signal: controller.signal
-    });
-    clearTimeout(timeout);
-
-    if (!response.ok) {
-      return res.status(502).json({ error: `Guardian API Fehler: HTTP ${response.status}` });
-    }
-
-    const data = await response.json();
-
-    if (data.response?.status !== 'ok') {
-      return res.status(502).json({ error: 'Ungültige Antwort von Guardian API' });
-    }
-
-    const items = (data.response.results || []).map((result) => ({
-      title: result.fields?.headline || result.webTitle,
-      thumbnail: result.fields?.thumbnail || null,
-      description: result.fields?.trailText || '',
-      link: result.webUrl,
-      pubDate: result.webPublicationDate,
-      byline: result.fields?.byline || ''
-    }));
-
-    return res.json({ status: 'ok', items });
+    const payload = await buildLatestNewsPayload();
+    latestNewsPayload = payload;
+    return res.json(payload);
   } catch (error) {
-    return res.status(500).json({ error: `Guardian API Fehler: ${error.message}` });
+    console.error('RSS News Fehler:', error.message);
+
+    if (latestNewsPayload) {
+      return res.json({
+        ...latestNewsPayload,
+        stale: true,
+        staleReason: error.message
+      });
+    }
+
+    return res.status(500).json({ error: `RSS News Fehler: ${error.message}` });
   }
 });
 
