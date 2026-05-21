@@ -590,8 +590,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const results = performSearch(query);
         
         if (results.length > 0) {
-            // Navigate to the top result
-            window.location.href = results[0].url;
+            // Check if we're in a subdirectory
+            const isInSubdir = window.location.pathname.includes('/public/') && 
+                               !window.location.pathname.endsWith('/public/index.html');
+            const pathPrefix = isInSubdir ? '../' : '';
+            
+            // Navigate to the top result with correct path
+            window.location.href = pathPrefix + results[0].url;
         } else {
             alert('Keine Ergebnisse gefunden. Versuche ein anderes Suchtwort.');
         }
