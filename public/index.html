@@ -26,10 +26,10 @@
         </h1>
       
         <ul class="nav-links" id="nav-links">
-          <li><a href="index.html">🏠 Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li class="dropdown" id="dropdown">
             <a href="#" class="dropdown-trigger">
-              🗂️ Themen <span class="arrow">▼</span>
+              Themen <span class="arrow">▼</span>
             </a>
             <ul class="dropdown-menu">
               <li><a href="./arbeitswelt/arbeitswelt.html">Arbeitswelt</a></li>
@@ -38,14 +38,20 @@
               <li><a href="./bildung/bildung.html">Bildung</a></li>
             </ul>
           </li>
-          <li><a href="./interviews/interviews.html">🎤 Interviews</a></li>
-          <li><a href="./newsfeed/newsfeed.html">📰 KI News</a></li>
+          <li><a href="./interviews/interviews.html">Interviews</a></li>
+          <li><a href="./newsfeed/newsfeed.html">KI News</a></li>
         </ul>
 
         <div class="nav-right">
-          <div class="search-bar-wrapper">
-            <input type="text" id="nav-search" class="nav-search-input" placeholder="Durchsuchen..." aria-label="Website durchsuchen" />
-            <button class="search-btn" id="nav-search-btn" aria-label="Suche ausführen">🔍</button>
+          <button class="search-btn" id="nav-search-btn" aria-label="Suche ausführen">🔍</button>
+          <div id="search-modal" class="search-modal hidden">
+            <div class="search-modal-content">
+              <div class="search-modal-header">
+                <input type="text" id="nav-search" class="search-modal-input" placeholder="Durchsuchen..." aria-label="Website durchsuchen" />
+                <button id="search-modal-close" class="search-modal-close" aria-label="Suche schließen">✕</button>
+              </div>
+              <div id="search-suggestions" class="search-suggestions"></div>
+            </div>
           </div>
           <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">🌙</button>
           <div class="hamburger" id="hamburger" aria-label="Menü öffnen/schließen">

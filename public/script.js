@@ -527,6 +527,9 @@ document.head.appendChild(style);
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('nav-search');
     const searchBtn = document.getElementById('nav-search-btn');
+    const searchModal = document.getElementById('search-modal');
+    const searchModalClose = document.getElementById('search-modal-close');
+    const searchSuggestions = document.getElementById('search-suggestions');
     
     if (!searchInput || !searchBtn) return;
     
@@ -585,27 +588,78 @@ document.addEventListener('DOMContentLoaded', () => {
         return results.sort((a, b) => b.score - a.score);
     };
     
-    const handleSearch = () => {
-        const query = searchInput.value;
-        const results = performSearch(query);
+    const displaySuggestions = (results) => {
+        searchSuggestions.innerHTML = '';
         
-        if (results.length > 0) {
-            // Check if we're in a subdirectory
-            const isInSubdir = window.location.pathname.includes('/public/') && 
-                               !window.location.pathname.endsWith('/public/index.html');
-            const pathPrefix = isInSubdir ? '../' : '';
-            
-            // Navigate to the top result with correct path
-            window.location.href = pathPrefix + results[0].url;
-        } else {
-            alert('Keine Ergebnisse gefunden. Versuche ein anderes Suchtwort.');
+        if (results.length === 0) {
+            searchSuggestions.innerHTML = '<div class="search-empty">Keine Ergebnisse gefunden</div>';
+            return;
         }
+        
+        results.slice(0, 8).forEach(result => {
+            const item = document.createElement('div');
+            item.className = 'search-suggestion-item';
+            item.innerHTML = `
+                <div class="search-suggestion-title">${result.title}</div>
+                <div class="search-suggestion-keywords">${result.keywords.slice(0, 2).join(', ')}</div>
+            `;
+            item.addEventListener('click', () => {
+                navigateToResult(result);
+            });
+            searchSuggestions.appendChild(item);
+        });
     };
     
-    searchBtn.addEventListener('click', handleSearch);
+    const navigateToResult = (result) => {
+        const isInSubdir = window.location.pathname.includes('/public/') && 
+                           !window.location.pathname.endsWith('/public/index.html') &&
+                           !window.location.pathname.endsWith('/index.html');
+        const pathPrefix = isInSubdir ? '../' : '';
+        
+        window.location.href = pathPrefix + result.url;
+    };
+    
+    const openSearchModal = () => {
+        searchModal.classList.remove('hidden');
+        searchInput.focus();
+    };
+    
+    const closeSearchModal = () => {
+        searchModal.classList.add('hidden');
+        searchInput.value = '';
+        searchSuggestions.innerHTML = '';
+    };
+    
+    // Event Listeners
+    searchBtn.addEventListener('click', openSearchModal);
+    
+    searchModalClose.addEventListener('click', closeSearchModal);
+    
+    searchModal.addEventListener('click', (e) => {
+        if (e.target === searchModal) {
+            closeSearchModal();
+        }
+    });
+    
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value;
+        const results = performSearch(query);
+        displaySuggestions(results);
+    });
+    
     searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-            handleSearch();
+            const results = performSearch(searchInput.value);
+            if (results.length > 0) {
+                navigateToResult(results[0]);
+            }
+        }
+    });
+    
+    // Close modal on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
+            closeSearchModal();
         }
     });
 });
