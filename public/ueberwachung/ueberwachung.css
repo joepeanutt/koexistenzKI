@@ -195,15 +195,15 @@ body.dark-mode .warning-visual {
 
 .app-cards {
     gap: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 0;
 }
 
 .applications-section + .content-card {
-    margin-top: 46px;
+    margin-top: 40px;
 }
 
 .app-card {
-    height: 100%;
+    height: auto;
     border: 1px solid rgba(113, 128, 150, 0.18);
 }
 

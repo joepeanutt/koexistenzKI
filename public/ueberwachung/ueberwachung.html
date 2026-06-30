@@ -135,6 +135,32 @@
         <span class="back-to-top-icon" aria-hidden="true">&uarr;</span>
     </button>
 
+        <!-- Chatbot Widget -->
+        <div id="chatbot-widget">
+            <button id="chatbot-icon" type="button" onclick="toggleChatbot()" aria-label="Chat öffnen" title="Chat öffnen">
+                <span id="chatbot-label">🤖</span>
+            </button>
+            <div id="chatbot-window" class="hidden">
+                <div id="chatbot-header">
+                    <span>Chat</span>
+                    <button id="chatbot-close" onclick="toggleChatbot()">✕</button>
+                </div>
+                <div id="chatbot-messages">
+                    <div class="chat-message bot">Hallo! Ich beantworte Fragen zu den Inhalten dieser Website.</div>
+                </div>
+                <div id="chatbot-input-area">
+                    <input
+                        id="chatbot-input"
+                        type="text"
+                        placeholder="Schreibe eine Nachricht..."
+                        onkeypress="if(event.key==='Enter') sendChatMessage()"
+                    />
+                    <button id="chatbot-send" onclick="sendChatMessage()">➤</button>
+                </div>
+            </div>
+        </div>
+
     <script src="../script.js"></script>
+        <script src="../chatbot/chatbot.js"></script>
 </body>
 </html>

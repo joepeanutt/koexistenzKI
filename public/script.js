@@ -386,13 +386,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('darkModeToggle');
     const body = document.body;
 
-    // Standard = Light Mode; nur Dark Mode wenn User das explizit gewählt hat
+    // Standard = Dark Mode fuer Erstbesuch; gespeicherte Einstellung hat Vorrang
     const darkModeCookie = CookieManager.getCookie('darkMode');
     const darkModeLocalStorage = localStorage.getItem('darkMode');
-    const isDarkMode = darkModeCookie === 'enabled' || darkModeLocalStorage === 'enabled';
+    const hasStoredPreference = darkModeCookie !== null || darkModeLocalStorage !== null;
+    const isDarkMode = hasStoredPreference
+        ? (darkModeCookie === 'enabled' || darkModeLocalStorage === 'enabled')
+        : true;
 
     if (isDarkMode) {
         body.classList.add('dark-mode');
+    }
+
+    if (!hasStoredPreference) {
+        CookieManager.setCookie('darkMode', 'enabled', 365);
+        localStorage.setItem('darkMode', 'enabled');
     }
 
     if (!darkModeToggle) return;
@@ -452,13 +460,20 @@ document.addEventListener('DOMContentLoaded', () => {
 // Zurück nach oben Button (global)
 document.addEventListener('DOMContentLoaded', () => {
     const backToTopBtn = document.getElementById('backToTop');
+    const chatbotWidget = document.getElementById('chatbot-widget');
     if (!backToTopBtn) return;
 
     const toggleBackToTopVisibility = () => {
         if (window.scrollY > 300) {
             backToTopBtn.classList.add('is-visible');
+            if (chatbotWidget) {
+                chatbotWidget.classList.add('is-hidden-on-scroll');
+            }
         } else {
             backToTopBtn.classList.remove('is-visible');
+            if (chatbotWidget) {
+                chatbotWidget.classList.remove('is-hidden-on-scroll');
+            }
         }
     };
 
