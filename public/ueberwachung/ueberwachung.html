@@ -11,21 +11,10 @@
     <nav class="navbar">
         <div class="container">
                         <h1 class="logo">
-                            <span class="logo-icon" aria-label="Roboter" title="KI Roboter">
-                                <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:8px;">
-                                    <rect x="6" y="10" width="20" height="14" rx="6" fill="#6C63FF"/>
-                                    <rect x="12" y="20" width="8" height="6" rx="2" fill="#FFD966"/>
-                                    <circle cx="11" cy="17" r="2" fill="#fff"/>
-                                    <circle cx="21" cy="17" r="2" fill="#fff"/>
-                                    <rect x="14.5" y="6" width="3" height="4" rx="1.5" fill="#6C63FF"/>
-                                    <rect x="4" y="14" width="2" height="6" rx="1" fill="#6C63FF"/>
-                                    <rect x="26" y="14" width="2" height="6" rx="1" fill="#6C63FF"/>
-                                </svg>
-                            </span>
                             <a href="../index.html">Un/Frieden und KI</a>
                         </h1>
             <div class="nav-right">
-              <button class="search-btn" id="nav-search-btn" aria-label="Suche ausführen">🔍</button>
+              <button class="search-btn" id="nav-search-btn" aria-label="Suche ausführen">Suche</button>
               <div id="search-modal" class="search-modal hidden">
                 <div class="search-modal-content">
                   <div class="search-modal-header">
@@ -35,7 +24,7 @@
                   <div id="search-suggestions" class="search-suggestions"></div>
                 </div>
               </div>
-              <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">🌙</button>
+              <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">Modus</button>
             </div>
             <ul class="nav-links" id="nav-links">
                 <li><a href="../index.html">Home</a></li>
@@ -57,151 +46,86 @@
     <header class="hero">
         <div class="container">
             <h2>KI in der Überwachung</h2>
-            <p>Wie nutzt Künstliche Intelligenz Überwachungstechnologien und welche Risiken birgt sie?</p>
+            <p>Wie KI Sicherheit verspricht und gleichzeitig Freiheit, Vertrauen und Selbstbestimmung bedrohen kann.</p>
         </div>
         <!-- Matrix-Background für Hero -->
         <canvas id="matrix-bg" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0.18;"></canvas>
     </header>
 
     <main class="container">
-        <section class="content-card" data-icon="👁️">
+        <section class="content-card" data-icon="">
             <div class="content-card-content">
-                <p class="section-kicker">Zwischen Schutz und Kontrolle</p>
-                <h3>Digitale Diktatur: Wie KI-Überwachung den inneren Frieden gefährdet</h3>
-                <p>KI-gestützte Überwachung verspricht Sicherheit, schnellere Ermittlungen und mehr Kontrolle über Risiken. Gleichzeitig kann sie den inneren Frieden einer Gesellschaft angreifen, wenn Menschen sich dauerhaft beobachtet fühlen, ihr Verhalten anpassen und das Vertrauen in Staat und Institutionen verlieren.</p>
-                <p>Der entscheidende Konflikt lautet deshalb nicht nur: <strong>Wie viel Sicherheit ist sinnvoll?</strong> Sondern auch: <strong>Wie viel Freiheit darf dafür verloren gehen?</strong> Genau hier wird KI-Überwachung politisch und ethisch brisant.</p>
+                <h3>Zwischen äußerer Sicherheit und innerem Unfrieden</h3>
+                <p>Die PDF beschreibt KI-Überwachung als einen der dunkelsten und zugleich ehrlichsten Bereiche der Debatte. Hier zeigt sich besonders klar, dass KI nicht nur helfen, sondern Macht vergrößern kann. Aus Kameras, Datenbanken, Mustererkennung und automatischer Bewertung entsteht ein System, das Menschen nicht nur sieht, sondern einordnet.</p>
+                <p>Genau dadurch wird der Konflikt politisch: Eine Gesellschaft ist nicht automatisch friedlich, nur weil sie kontrolliert wird. Wenn Menschen sich dauerhaft beobachtet fühlen, verändert sich ihr Verhalten. Freiheit verschwindet dann nicht unbedingt durch ein offenes Verbot, sondern durch Vorsicht, Anpassung und Selbstzensur.</p>
             </div>
         </section>
-
-        <figure class="section-image">
-            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1400&q=80" alt="Digitale Code-Strukturen als Symbol für datengetriebene KI-Analyse" class="topic-image">
-            <figcaption>Online-Bild von Unsplash als Symbol für Systeme, die große Datenmengen auswerten und Verhalten messbar machen.</figcaption>
-        </figure>
 
         <section class="applications-section">
-            <h3>Wo KI-Überwachung heute ansetzt</h3>
+            <h3>Formen KI-gestützter Überwachung</h3>
             <div class="app-cards">
-                <div class="app-card">
-                    <h4>Gesichtserkennung</h4>
-                    <p>Personen werden in Echtzeit identifiziert. Solche Systeme werden etwa mit Social Scoring und öffentlicher Verhaltenskontrolle verbunden.</p>
-                </div>
-                <div class="app-card">
+                <a class="app-card" href="#ueberwachung-gesichtserkennung">
+                    <h4>Gesichterkennung</h4>
+                    <p>Systeme erkennen und identifizieren Personen im öffentlichen Raum.</p>
+                </a>
+                <a class="app-card" href="#ueberwachung-predictive">
                     <h4>Predictive Policing</h4>
-                    <p>Algorithmen sagen vermeintliche Kriminalitätsschwerpunkte voraus. Das kann bestehende soziale Vorurteile verstärken statt neutral zu entscheiden.</p>
-                </div>
-                <div class="app-card">
-                    <h4>Massenhafte Datenanalyse</h4>
-                    <p>Geheimdienste und Sicherheitsbehörden können Kommunikations- und Bewegungsdaten großflächig auswerten und so ein Klima ständiger Beobachtung erzeugen.</p>
-                </div>
-                <div class="app-card">
-                    <h4>Verhaltenssteuerung</h4>
-                    <p>Durch gezielte Auswertung von Daten können Menschen beeinflusst, sortiert oder sanktioniert werden, noch bevor sie selbst es merken.</p>
-                </div>
+                    <p>Algorithmen markieren Orte oder Personen als mögliches Risiko.</p>
+                </a>
+                <a class="app-card" href="#ueberwachung-risiken">
+                    <h4>Datenauswertung</h4>
+                    <p>Digitale Spuren werden gesammelt und systematisch ausgewertet.</p>
+                </a>
+                <a class="app-card" href="#ueberwachung-risiken">
+                    <h4>Private Kontrolle</h4>
+                    <p>Auch Unternehmen analysieren Daten und beobachten digitales Verhalten.</p>
+                </a>
             </div>
         </section>
 
-        <figure class="section-image section-image--half">
-            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80" alt="Menschen in einer digital geprägten Umgebung als Symbol für KI im Alltag" class="topic-image">
-            <figcaption>Online-Bild von Unsplash: KI und Datentechnik sind längst Teil des öffentlichen und privaten Alltags.</figcaption>
-        </figure>
-
-        <section class="content-card insight-card" data-icon="⚠️">
+        <section class="content-card" data-icon="">
             <div class="content-card-content">
-                <h3>Warum das den inneren Frieden zerstören kann</h3>
-                <p>Eine demokratische Gesellschaft lebt von Vertrauen, Selbstbestimmung und dem Gefühl, nicht willkürlich kontrolliert zu werden. KI-Überwachung kann genau diese Grundlagen schwächen:</p>
-                <ul class="insight-list">
-                    <li><strong>Chilling Effect:</strong> Menschen werden vorsichtiger, passen ihr Verhalten an und äußern sich weniger frei.</li>
-                    <li><strong>Selbstzensur:</strong> Wer ständige Beobachtung erwartet, denkt und handelt konformer.</li>
-                    <li><strong>Diskriminierung:</strong> Verzerrte Datensätze können Minderheiten oder benachteiligte Gruppen stärker treffen.</li>
-                    <li><strong>Misstrauen:</strong> Wenn Kontrolle wichtiger wirkt als Freiheit, sinkt das Vertrauen in demokratische Institutionen.</li>
-                </ul>
+                <h3>Chancen: Sicherheit, Prävention und Ordnung</h3>
+                <p>Die PDF stellt klar, dass Überwachungstechnik nicht einfach als nutzlos abgetan werden kann. In bestimmten Situationen kann sie helfen, gesuchte Personen zu finden, Muster schneller zu erkennen oder große Veranstaltungen sicherer einzuschätzen.</p>
+                <p>Gerade deshalb ist das Thema so schwierig: Sicherheitsbehörden verweisen auf konkrete Vorteile, während Grundrechtsfragen gleichzeitig immer größer werden. Die eigentliche Frage lautet also nicht, ob Technik nützlich sein kann, sondern unter welchen Bedingungen ihr Einsatz notwendig, verhältnismäßig und kontrollierbar bleibt.</p>
             </div>
         </section>
 
-        <section class="split-section">
-            <article class="detail-panel">
-                <p class="section-kicker">Freiheit</p>
-                <h3>Überwachung verändert Verhalten</h3>
-                <p>Freiheit bedeutet nicht nur Schutz vor Gewalt, sondern auch die Möglichkeit, sich ohne permanente Beobachtung zu entfalten. Sobald Menschen wissen, dass ihre Wege, Kontakte oder Aussagen analysiert werden, entsteht Druck zur Anpassung. Kritik, Kreativität und Widerspruch werden leiser.</p>
-                <p>Besonders gefährlich wird es, wenn KI-Systeme Entscheidungen automatisieren und dabei bestehende Ungleichheiten reproduzieren. Dann wird Überwachung nicht nur mächtig, sondern auch ungerecht.</p>
-            </article>
-
-            <article class="detail-panel">
-                <p class="section-kicker">Demokratie</p>
-                <h3>Kontrolle statt Vertrauen</h3>
-                <p>Innere Stabilität entsteht durch faire Regeln und legitime Institutionen. Wenn Bürgerinnen und Bürger aber das Gefühl haben, der Staat beobachte, sortiere oder manipuliere sie, kippt dieses Verhältnis. Aus Vertrauen wird Distanz, aus Sicherheit wird Unsicherheit.</p>
-                <p>Überwachung trifft außerdem oft nicht alle gleich. Werden bestimmte Gruppen häufiger kontrolliert, wachsen soziale Spannungen und das Gefühl politischer Ausgrenzung.</p>
-            </article>
-        </section>
-
-        <figure class="section-image section-image--half">
-            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1400&q=80" alt="Robotik als Symbol für eine ungewisse technologische Zukunft" class="topic-image">
-            <figcaption>Online-Bild von Unsplash als Sinnbild für die offene Frage, wo Schutz endet und Kontrolle beginnt.</figcaption>
-        </figure>
-
-        <section class="content-card ethics-card" data-icon="⚖️">
+        <section class="content-card" data-icon="" id="ueberwachung-risiken">
             <div class="content-card-content">
-                <h3>Ethische Schlüsselfragen</h3>
-                <div class="ethics-grid">
-                    <div class="ethics-item">
-                        <h4>Wer setzt Grenzen?</h4>
-                        <p>Sollen Algorithmen mitentscheiden, wie viel Freiheit zugunsten von Sicherheit geopfert wird, oder braucht es klare demokratische Kontrolle?</p>
-                    </div>
-                    <div class="ethics-item">
-                        <h4>Wie transparent ist das System?</h4>
-                        <p>Viele Modelle bleiben Black Boxes. Betroffene verstehen dann nicht, warum sie überprüft, markiert oder benachteiligt werden.</p>
-                    </div>
-                    <div class="ethics-item">
-                        <h4>Wer trägt Verantwortung?</h4>
-                        <p>Wenn ein System Fehlentscheidungen trifft, reicht der Hinweis auf Technik nicht aus. Verantwortung muss menschlich und rechtlich klar zugeordnet sein.</p>
-                    </div>
-                </div>
+                <h3>Risiken: Privatsphäre, Selbstzensur und Machtmissbrauch</h3>
+                <p><strong>Unsichtbare Kontrolle:</strong> Menschen wissen oft nicht, wann sie erfasst werden, welche Daten gespeichert werden und wie lange diese später nutzbar bleiben.</p>
+                <p><strong>Selbstzensur:</strong> Wer erwartet, beobachtet zu werden, spricht vorsichtiger, meidet bestimmte Orte oder beteiligt sich zurückhaltender am öffentlichen Leben.</p>
+                <p><strong>Diskriminierung und Verzerrung:</strong> Verzerrte Daten können bestimmte Gruppen häufiger treffen. Gerade bei Polizei und Sicherheitslogik wird aus Statistik so schnell sozialer Vorverdacht.</p>
+                <p><strong>Machtproblem:</strong> Besonders gefährlich wird Überwachung, wenn sie mit staatlicher oder wirtschaftlicher Macht verbunden ist und Menschen sich kaum noch unbeobachtet bewegen können.</p>
             </div>
         </section>
 
-        <section class="content-card warning-card" data-icon="🎬">
+        <section class="content-card" data-icon="" id="ueberwachung-predictive">
             <div class="content-card-content">
-                <p class="section-kicker">Warnbilder</p>
-                <h3>Von 1984 bis Black Mirror</h3>
-                <figure class="warning-visual">
-                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" alt="Nahaufnahme von Technologie-Hardware als Symbol für die Macht moderner KI-Systeme" class="warning-image">
-                    <figcaption>Online-Bild von Unsplash: Je leistungsfähiger digitale Systeme werden, desto wichtiger werden klare Grenzen für ihren Einsatz.</figcaption>
-                </figure>
-                <p>Literatur und Film zeigen seit Jahrzehnten, wohin totale Überwachung führen kann: George Orwells <em>1984</em> beschreibt den allgegenwärtigen "Großen Bruder", Dave Eggers' <em>The Circle</em> eine scheinbar transparente, aber unfreiere Gesellschaft. Produktionen wie <em>Minority Report</em> oder <em>Black Mirror</em> machen sichtbar, wie Vorhersagesysteme und totale Datenerfassung Freiheit schrittweise ersetzen.</p>
-                <p>Diese Beispiele wirken heute weniger wie Science-Fiction als wie Warnsignale. Je stärker KI mit Big Data, Gesichtserkennung und Verhaltensbewertung verbunden wird, desto realistischer wird die Vorstellung einer digitalen Diktatur.</p>
+                <h3>Predictive Policing: Wenn Vorhersage zur Vorverurteilung wird</h3>
+                <p>Die PDF beschreibt hier einen besonders problematischen Kreislauf: Polizeidaten zeigen nicht einfach objektiv, wo Kriminalität passiert, sondern auch, wo früher häufiger kontrolliert wurde. Ein Algorithmus kann daraus schließen, dass dort noch mehr Kontrolle nötig sei.</p>
+                <p>So entsteht eine Rückkopplung: Wo stärker kontrolliert wird, werden mehr Vorfälle registriert. Diese neuen Daten bestätigen dann scheinbar die ursprüngliche Annahme. Für Betroffene bedeutet das, dass sie nicht nach individuellem Verhalten, sondern nach Datenmustern ihrer Umgebung behandelt werden.</p>
+                <p>Genau deshalb spricht die PDF davon, dass aus Prävention schnell Vorverdacht werden kann.</p>
             </div>
         </section>
 
-        <section class="content-card conclusion-card" data-icon="🔐">
+        <section class="content-card" data-icon="" id="ueberwachung-gesichtserkennung">
             <div class="content-card-content">
-                <h3>Fazit</h3>
-                <p>KI kann zur öffentlichen Sicherheit beitragen, etwa bei der Erkennung realer Gefahren. Ohne klare Regeln droht sie jedoch zum Werkzeug von Einschüchterung, sozialer Sortierung und politischer Kontrolle zu werden.</p>
-                <p>Damit KI den inneren Frieden nicht zerstört, braucht es vier Grundlagen:</p>
-                <div class="conclusion-points">
-                    <span>Starke Datenschutzgesetze</span>
-                    <span>Transparente Algorithmen</span>
-                    <span>Demokratische Kontrolle</span>
-                    <span>Öffentliche Debatte über Grenzen</span>
-                </div>
+                <h3>Gesichtserkennung und öffentlicher Raum</h3>
+                <p>Gesichtserkennung ist laut PDF besonders einschneidend, weil das Gesicht nicht wie ein Passwort gewechselt werden kann. Man muss nichts aktiv eingeben, man ist einfach sichtbar.</p>
+                <p>Dadurch verändert sich der öffentliche Raum selbst. Menschen müssen sich bewegen, treffen und protestieren können, ohne bei jedem Schritt identifizierbar zu sein. Wenn jede Demonstration potenziell mit Gesichtsdaten verbunden wird, verändert sich politische Teilhabe.</p>
+                <p>Gerade deshalb ist hier nicht nur technische Genauigkeit wichtig, sondern die Frage, wie frei Menschen sich im Alltag überhaupt noch bewegen können.</p>
             </div>
         </section>
 
-        <section class="sources-section content-card" data-icon="📚">
+        <section class="content-card" data-icon="">
             <div class="content-card-content">
-                <p class="section-kicker">Quellen</p>
-                <h3>Ausgewählte Literatur und Belege</h3>
-                <ol class="source-list">
-                    <li>Barrat, James (2013): <em>Our Final Invention: Artificial Intelligence and the End of the Human Era.</em> Thomas Dunne Books.</li>
-                    <li>Cadwalladr, Carole; Graham-Harrison, Emma (2018): <em>Revealed: 50 million Facebook profiles harvested for Cambridge Analytica in major data breach.</em> The Guardian.</li>
-                    <li>Foucault, Michel (1975): <em>Überwachen und Strafen. Die Geburt des Gefängnisses.</em> Suhrkamp.</li>
-                    <li>Greenwald, Glenn (2014): <em>No Place to Hide: Edward Snowden, the NSA, and the U.S. Surveillance State.</em> Metropolitan Books.</li>
-                    <li>Lenzen, Manuela (2018): <em>Künstliche Intelligenz. Was sie kann &amp; was uns erwartet.</em> C.H. Beck.</li>
-                    <li>O'Neil, Cathy (2016): <em>Weapons of Math Destruction: How Big Data Increases Inequality and Threatens Democracy.</em> Crown.</li>
-                    <li>Pasquale, Frank (2015): <em>The Black Box Society: The Secret Algorithms That Control Money and Information.</em> Harvard University Press.</li>
-                    <li>Solove, Daniel J. (2007): <em>The Future of Reputation: Gossip, Rumor, and Privacy on the Internet.</em> Yale University Press.</li>
-                    <li>Strittmatter, Kai (2018): <em>Die Neuerfindung der Diktatur: Wie China den digitalen Überwachungsstaat aufbaut und uns damit herausfordert.</em> Piper.</li>
-                    <li>Zuboff, Shoshana (2019): <em>Das Zeitalter des Überwachungskapitalismus.</em> Campus Verlag.</li>
-                </ol>
+                <h3>Demokratische Grenzen und Zwischenfazit</h3>
+                <p><strong>Klare Regeln von Anfang an:</strong> Eine digitale Diktatur entsteht laut PDF nicht erst plötzlich, sondern oft schrittweise durch viele einzeln begründbare Maßnahmen.</p>
+                <p><strong>Wichtige Kontrollfragen:</strong> Welche Daten dürfen gesammelt werden? Wer darf sie verknüpfen? Wie lange werden sie gespeichert? Wer kontrolliert die Kontrolleure?</p>
+                <p><strong>Öffentliche Freiheit als Maßstab:</strong> Entscheidend ist nicht nur, ob Überwachung technisch funktioniert, sondern was sie mit Menschen macht, die unter ihr leben.</p>
+                <p><strong>Zwischenfazit:</strong> KI kann Sicherheit unterstützen. Wenn sie aber Freiheit, Privatsphäre und demokratische Kontrolle verdrängt, entsteht keine friedliche Gesellschaft, sondern kontrollierte Ruhe.</p>
             </div>
         </section>
     </main>

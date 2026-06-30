@@ -1,4 +1,91 @@
 // ============================================
+// Page Transition System
+// ============================================
+
+const PageTransition = {
+    isTransitioning: false,
+    transitionDuration: 300, // Millisekunden für Fade-Out
+    fadeInDelay: 300, // Verzögerung für Fade-In nach Seite geladen
+
+    init() {
+        // Erstelle Overlay-Element wenn es nicht existiert
+        if (!document.getElementById('page-transition-overlay')) {
+            const overlay = document.createElement('div');
+            overlay.id = 'page-transition-overlay';
+            document.body.appendChild(overlay);
+        }
+
+        this.setupLinkInterception();
+        this.triggerPageLoadFadeIn();
+    },
+
+    setupLinkInterception() {
+        // Höre auf alle Link-Klicks
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href]');
+            if (!link) return;
+
+            const href = link.getAttribute('href');
+            
+            // Ignoriere externe Links, Anchor Links, und spezielle Links
+            if (
+                href.startsWith('#') ||
+                href.startsWith('javascript:') ||
+                href.includes('://') ||
+                link.target === '_blank' ||
+                link.rel === 'external'
+            ) {
+                return;
+            }
+
+            e.preventDefault();
+            this.navigateToPage(href);
+        }, true);
+
+        // Höre auch auf Form-Submits wenn nötig
+        window.addEventListener('beforeunload', () => {
+            document.body.classList.add('page-loading');
+        });
+    },
+
+    navigateToPage(href) {
+        if (this.isTransitioning) return;
+
+        this.isTransitioning = true;
+        const overlay = document.getElementById('page-transition-overlay');
+
+        // Starte Fade-Out
+        overlay.classList.add('fade-out');
+
+        // Nach Fade-Out Animation, navigiere
+        setTimeout(() => {
+            window.location.href = href;
+        }, this.transitionDuration);
+
+        // Timeout-Schutz: navigiere auf jeden Fall
+        setTimeout(() => {
+            window.location.href = href;
+        }, this.transitionDuration + 500);
+    },
+
+    triggerPageLoadFadeIn() {
+        // Warte kurz damit Browser die Seite rendern kann
+        setTimeout(() => {
+            const overlay = document.getElementById('page-transition-overlay');
+            if (overlay) {
+                overlay.classList.remove('fade-out');
+            }
+            this.isTransitioning = false;
+        }, 50);
+    }
+};
+
+// Initialisiere Page Transition System beim Laden
+document.addEventListener('DOMContentLoaded', () => {
+    PageTransition.init();
+}, { once: true });
+
+// ============================================
 // Cookie Management System
 // ============================================
 
@@ -82,6 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const cookieSettingsRejectBtn = document.getElementById('cookie-settings-reject');
     const cookieSettingsSaveBtn = document.getElementById('cookie-settings-save');
 
+    if (!cookieBanner) {
+        return;
+    }
+
     // Zeige Banner nur wenn noch keine Zustimmung gegeben wurde
     if (!CookieManager.hasConsentBeenGiven()) {
         cookieBanner.classList.remove('hidden');
@@ -164,11 +255,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Schließe Modal bei Klick außerhalb
-    cookieModal.addEventListener('click', (e) => {
-        if (e.target === cookieModal) {
-            cookieModal.classList.add('hidden');
-        }
-    });
+    if (cookieModal) {
+        cookieModal.addEventListener('click', (e) => {
+            if (e.target === cookieModal) {
+                cookieModal.classList.add('hidden');
+            }
+        });
+    }
 });
 
 // Wartet, bis das Dokument geladen ist
@@ -293,11 +386,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('darkModeToggle');
     const body = document.body;
 
-    // Standard = Dark Mode; nur Light Mode wenn User das explizit gewählt hat
+    // Standard = Light Mode; nur Dark Mode wenn User das explizit gewählt hat
     const darkModeCookie = CookieManager.getCookie('darkMode');
     const darkModeLocalStorage = localStorage.getItem('darkMode');
-    const isLightMode = darkModeCookie === 'disabled' || darkModeLocalStorage === 'disabled';
-    const isDarkMode = !isLightMode;
+    const isDarkMode = darkModeCookie === 'enabled' || darkModeLocalStorage === 'enabled';
 
     if (isDarkMode) {
         body.classList.add('dark-mode');
@@ -427,98 +519,72 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Typing Effect für Hero und Content-Überschriften
+// Sanfter Reveal für Überschriften
 document.addEventListener('DOMContentLoaded', () => {
-    const typeWriter = (element, text, speed = 100) => {
-        element.textContent = '';
-        let i = 0;
-        const timer = setInterval(() => {
-            if (i < text.length) {
-                element.textContent += text.charAt(i);
-                i++;
-            } else {
-                clearInterval(timer);
-            }
-        }, speed);
-    };
-
-    // Hero-Text
-    const heroText = document.querySelector('.hero h2');
-    if (heroText) {
-        const text = heroText.textContent;
-        typeWriter(heroText, text);
-    }
-
-    // Content-Card Überschriften
+        // Content-Card Überschriften ohne Schreibeffekt
     const contentHeadings = document.querySelectorAll('.content-card h2');
     contentHeadings.forEach(heading => {
-        const text = heading.textContent;
-        typeWriter(heading, text, 80); // Schneller für Unterseiten
+                heading.style.opacity = '1';
     });
 });
 
-// Interaktiver Parallax-Effekt für Hero-Hintergrund
-window.addEventListener('scroll', () => {
-  const hero = document.querySelector('.hero');
-  if (!hero) return;
-  const scrollY = window.scrollY || window.pageYOffset;
-  // Parallax: verschiebe den Hintergrund leicht vertikal
-  hero.style.backgroundPosition = `center ${-scrollY * 0.18}px`;
-  // Optional: animiere die Scanlines-Deckkraft je nach Scroll
-  const after = hero.querySelector('::after');
-  // (Pseudo-Elemente können nicht direkt per JS angesprochen werden)
-  // Daher: Passe die Opazität via CSS-Variable an
-  hero.style.setProperty('--scanline-opacity', 1 - Math.min(scrollY / 600, 0.7));
-});
+// Matrix-Zahlenhintergrund fuer Hero-Bereiche
+(function matrixRain() {
+    const canvas = document.getElementById('matrix-bg');
+    if (!canvas) return;
 
-// Passe Scanline-Deckkraft im CSS an
-const style = document.createElement('style');
-style.innerHTML = `
-.hero::after {
-  opacity: var(--scanline-opacity, 1);
-}`;
-document.head.appendChild(style);
+    const hero = document.querySelector('.hero');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-// Matrix-Zahlenregen für alle Themenseiten
-(function matrixRain(){
-  const canvas = document.getElementById('matrix-bg');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let width = canvas.width = window.innerWidth;
-  let hero = document.querySelector('.hero');
-  let height = canvas.height = hero ? hero.offsetHeight : 400;
-  let fontSize = 22;
-  let columns = Math.floor(width / fontSize);
-  let drops = Array(columns).fill(1);
-  const chars = '01';
+    const chars = '01';
+    const fontSize = 18;
+    let width = 0;
+    let height = 0;
+    let drops = [];
+    let rafId = null;
 
-  function draw() {
-    ctx.fillStyle = 'rgba(15,32,39,0.18)';
-    ctx.fillRect(0, 0, width, height);
-    ctx.font = fontSize + 'px monospace';
-    ctx.fillStyle = '#00ffe7';
-    for (let i = 0; i < drops.length; i++) {
-      const text = chars[Math.floor(Math.random() * chars.length)];
-      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-      if (Math.random() > 0.975) {
-        drops[i] = 0;
-      }
-      drops[i]++;
-      if (drops[i] * fontSize > height) drops[i] = 0;
-    }
-  }
+    const resize = () => {
+        const heroRect = hero ? hero.getBoundingClientRect() : { width: window.innerWidth, height: 420 };
+        width = Math.max(1, Math.floor(heroRect.width));
+        height = Math.max(1, Math.floor(heroRect.height));
+        canvas.width = width;
+        canvas.height = height;
 
-  function resize() {
-    width = canvas.width = window.innerWidth;
-    hero = document.querySelector('.hero');
-    height = canvas.height = hero ? hero.offsetHeight : 400;
-    columns = Math.floor(width / fontSize);
-    drops = Array(columns).fill(1);
-  }
+        const columns = Math.max(1, Math.floor(width / fontSize));
+        drops = Array.from({ length: columns }, () => Math.floor(Math.random() * (height / fontSize)));
+    };
 
-  window.addEventListener('resize', resize);
-  setInterval(draw, 55);
-  resize();
+    const draw = () => {
+        ctx.fillStyle = 'rgba(14, 30, 44, 0.12)';
+        ctx.fillRect(0, 0, width, height);
+        ctx.fillStyle = 'rgba(140, 219, 255, 0.65)';
+        ctx.font = `${fontSize}px monospace`;
+
+        for (let i = 0; i < drops.length; i += 1) {
+            const char = chars[Math.floor(Math.random() * chars.length)];
+            const x = i * fontSize;
+            const y = drops[i] * fontSize;
+            ctx.fillText(char, x, y);
+
+            if (y > height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i] += 1;
+        }
+
+        rafId = window.requestAnimationFrame(draw);
+    };
+
+    resize();
+    draw();
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('beforeunload', () => {
+        if (rafId) {
+            window.cancelAnimationFrame(rafId);
+        }
+    });
 })();
 
 // ============================================

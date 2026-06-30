@@ -11,21 +11,10 @@
     <nav class="navbar">
         <div class="container">
                         <h1 class="logo">
-                            <span class="logo-icon" aria-label="Roboter" title="KI Roboter">
-                                <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:8px;">
-                                    <rect x="6" y="10" width="20" height="14" rx="6" fill="#6C63FF"/>
-                                    <rect x="12" y="20" width="8" height="6" rx="2" fill="#FFD966"/>
-                                    <circle cx="11" cy="17" r="2" fill="#fff"/>
-                                    <circle cx="21" cy="17" r="2" fill="#fff"/>
-                                    <rect x="14.5" y="6" width="3" height="4" rx="1.5" fill="#6C63FF"/>
-                                    <rect x="4" y="14" width="2" height="6" rx="1" fill="#6C63FF"/>
-                                    <rect x="26" y="14" width="2" height="6" rx="1" fill="#6C63FF"/>
-                                </svg>
-                            </span>
                             <a href="../index.html">Un/Frieden und KI</a>
                         </h1>
             <div class="nav-right">
-              <button class="search-btn" id="nav-search-btn" aria-label="Suche ausführen">🔍</button>
+              <button class="search-btn" id="nav-search-btn" aria-label="Suche ausführen">Suche</button>
               <div id="search-modal" class="search-modal hidden">
                 <div class="search-modal-content">
                   <div class="search-modal-header">
@@ -35,7 +24,7 @@
                   <div id="search-suggestions" class="search-suggestions"></div>
                 </div>
               </div>
-              <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">🌙</button>
+              <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">Modus</button>
             </div>
             <ul class="nav-links" id="nav-links">
                 <li><a href="../index.html">Home</a></li>
@@ -57,79 +46,88 @@
     <header class="hero">
         <div class="container">
             <h2>KI in der Arbeitswelt</h2>
-            <p>Wie verändert Künstliche Intelligenz unsere Jobs und die Zukunft der Arbeit?</p>
+            <p>Wie KI Aufgaben, Berufe, Druck und Chancen in der Arbeitswelt verändert.</p>
         </div>
         <!-- Matrix-Background für Hero -->
         <canvas id="matrix-bg" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0.18;"></canvas>
     </header>
 
     <main class="container">
-        <section class="content-card" data-icon="🤖">
+        <section class="content-card" data-icon="">
             <div class="content-card-content">
-                <h3>Einführung</h3>
-                <p>KI revolutioniert die Arbeitswelt durch Automatisierung, neue Berufe und effizientere Prozesse. Sie bietet Chancen, birgt aber auch Risiken wie Jobverlust.</p>
+                <h3>Warum KI in der Arbeitswelt so direkt spürbar ist</h3>
+                <p>Die PDF beschreibt die Arbeitswelt als einen Bereich, in dem KI für viele Menschen am unmittelbarsten sichtbar wird. Nicht jeder hat mit staatlicher KI oder Gesichtserkennung zu tun, aber fast alle müssen arbeiten, sich bewerben oder beruflich mit Veränderungen umgehen.</p>
+                <p>Dabei geht es nicht nur um die Frage, ob Jobs verschwinden. Viel wichtiger ist, dass sich Berufe auf Aufgabenebene verändern. Genau diese Verschiebung kann entlasten, aber auch Druck, Unsicherheit und neue soziale Spannungen auslösen.</p>
             </div>
         </section>
 
         <section class="applications-section">
-            <h3>KI-Anwendungen in der Arbeitswelt</h3>
+            <h3>Wo KI Arbeit heute verändert</h3>
             <div class="app-cards">
-                <div class="app-card">
-                    <h4>Automatisierung</h4>
-                    <p>Wiederholende Aufgaben werden von KI übernommen, z.B. in der Produktion.</p>
-                </div>
-                <div class="app-card">
-                    <h4>Neue Berufe</h4>
-                    <p>KI-Spezialisten, Datenanalysten und Ethikberater werden gefragt.</p>
-                </div>
-                <div class="app-card">
-                    <h4>Personalisiert</h4>
-                    <p>KI hilft bei der Personalauswahl und Weiterbildung.</p>
-                </div>
-                <div class="app-card">
-                    <h4>Zukunftsaussichten</h4>
-                    <p>Balance zwischen Technologie und menschlicher Arbeit finden.</p>
-                </div>
+                <a class="app-card" href="#arbeitswelt-chancen">
+                    <h4>Büro und Verwaltung</h4>
+                    <p>KI unterstützt beim Schreiben, Sortieren und schnelleren Auswerten von Informationen.</p>
+                </a>
+                <a class="app-card" href="#arbeitswelt-chancen">
+                    <h4>Industrie und Logistik</h4>
+                    <p>Systeme helfen bei Qualitätskontrolle, Wartung und standardisierten Abläufen.</p>
+                </a>
+                <a class="app-card" href="#arbeitswelt-chancen">
+                    <h4>Kundenservice und Kommunikation</h4>
+                    <p>Standardfragen werden automatisiert beantwortet, komplexe Fälle gehen an Menschen weiter.</p>
+                </a>
+                <a class="app-card" href="#arbeitswelt-management">
+                    <h4>Recruiting und Management</h4>
+                    <p>Unternehmen sortieren Bewerbungen und steuern Abläufe stärker datenbasiert.</p>
+                </a>
             </div>
         </section>
 
-        <section class="content-card" data-icon="📈">
+        <section class="content-card" data-icon="" id="arbeitswelt-chancen">
             <div class="content-card-content">
-                <h3>Chancen der KI in der Arbeitswelt</h3>
-                <p><strong>Effizienzsteigerung:</strong> KI automatisiert zeitaufwändige Aufgaben und ermöglicht es Arbeitnehmern, sich auf kreative und strategische Aufgaben zu konzentrieren.</p>
-                <p><strong>Neue Märkte:</strong> Unternehmen können neue Märkte erschließen und innovative Produkte entwickeln, was zu wirtschaftlichem Wachstum führt.</p>
-                <p><strong>Bessere Entscheidungen:</strong> Datengestützte Analysen helfen Führungskräften, bessere und schnellere Geschäftsentscheidungen zu treffen.</p>
-                <p><strong>Sichere Arbeitsplätze:</strong> Durch KI können gefährliche Arbeitsumgebungen automatisiert werden, was Sicherheit und Wohlbefinden verbessert.</p>
+                <h3>Chancen: Entlastung, Produktivität und neue Aufgaben</h3>
+                <p><strong>Weniger monotone Tätigkeiten:</strong> KI kann wiederkehrende Arbeiten übernehmen. Dadurch bleibt mehr Zeit für Aufgaben, bei denen Erfahrung, Kreativität und menschliches Urteil wichtiger sind.</p>
+                <p><strong>Konkrete Entlastung im Alltag:</strong> Die PDF nennt Beispiele wie Pflege, Sachbearbeitung oder kleine Betriebe, in denen schon kleine Automatisierungen Zeit sparen und Abläufe verbessern können.</p>
+                <p><strong>Neue Rollen und Kompetenzen:</strong> Mit KI entstehen Aufgaben in Datenanalyse, IT-Sicherheit, Prozessgestaltung, Datenschutz und kritischer Kontrolle von KI-Ergebnissen.</p>
+                <p><strong>Kein einfacher Nullsummeneffekt:</strong> Laut PDF entstehen neue Arbeitsfelder, aber nicht automatisch für dieselben Menschen, deren bisherige Aufgaben wegfallen. Genau deshalb ist die Gestaltung entscheidend.</p>
             </div>
         </section>
 
-        <section class="content-card" data-icon="⚠️">
+        <section class="content-card" data-icon="">
             <div class="content-card-content">
-                <h3>Herausforderungen und Risiken</h3>
-                <p><strong>Jobverlust:</strong> Millionen von Jobs könnten durch Automatisierung gefährdet sein, besonders in Bereichen mit repetitiven Aufgaben.</p>
-                <p><strong>Qualifikationslücke:</strong> Es entstehen neue Anforderungen an Fachkräfte, aber viele Arbeitnehmer benötigen Umschulung und Weiterbildung.</p>
-                <p><strong>Ungleichheit:</strong> Während einige Branchen boomen, erleben andere drastische Schrumpfung, was zu wirtschaftlichen Ungleichgewichten führt.</p>
-                <p><strong>Algorithmische Fairness:</strong> KI-Systeme bei der Einstellung können zu Diskriminierung führen, wenn sie mit voreingenommenen Daten trainiert werden.</p>
+                <h3>Risiken: Unsicherheit, Druck und neue Ungleichheit</h3>
+                <p><strong>Arbeitsplatzverlust:</strong> Besonders standardisierte Tätigkeiten sind gefährdet. Neu ist laut PDF, dass generative KI auch Aufgaben übernimmt, die lange als höher qualifiziert galten, zum Beispiel Schreiben, Analysieren oder Programmieren.</p>
+                <p><strong>Soziale Unsicherheit:</strong> Selbst ohne direkte Entlassung entsteht Druck, ständig mithalten zu müssen. Beschäftigte fragen sich, ob ihre Ausbildung noch reicht oder ob neue Tools sie austauschbarer machen.</p>
+                <p><strong>Ungleiche Verteilung der Vorteile:</strong> Wenn Unternehmen produktiver werden, Beschäftigte aber nur schneller, messbarer und unsicherer arbeiten, wächst sozialer Unfrieden statt Fortschritt.</p>
+                <p><strong>Weiterbildung als Belastung:</strong> Weiterbildung ist wichtig, aber sie kostet Zeit, Geld und Energie. Wer bereits sicher beschäftigt ist, profitiert leichter als Menschen mit unsicheren Jobs.</p>
             </div>
         </section>
 
-        <section class="content-card" data-icon="💡">
+        <section class="content-card" data-icon="" id="arbeitswelt-management">
             <div class="content-card-content">
-                <h3>Fallbeispiele</h3>
-                <p><strong>Fertigung:</strong> Roboterarme ersetzen manuelle Montagetätigkeiten und erhöhen Präzision und Geschwindigkeit.</p>
-                <p><strong>Kundenservice:</strong> Chatbots beantworten Kundenanfragen rund um die Uhr und leiten komplexe Fragen an Menschen weiter.</p>
-                <p><strong>Datenanalyse:</strong> KI-Tools helfen Finanzanalysten, Muster in großen Datenmengen zu erkennen.</p>
-                <p><strong>Lagerlogistik:</strong> Autonome Systeme optimieren Lagerverwaltung und Versandprozesse.</p>
+                <h3>Algorithmisches Management</h3>
+                <p>Ein besonders kritischer Punkt in der PDF ist algorithmisches Management. Gemeint sind Systeme, die Arbeit organisieren, Aufgaben verteilen, Leistung messen oder Beschäftigte bewerten.</p>
+                <p>Das Problem ist nicht nur Kontrolle, sondern fehlende Begründung. Wenn Menschen weniger Aufträge bekommen, schlechter bewertet werden oder stärker unter Druck geraten, muss nachvollziehbar sein, warum. Sonst entsteht ein Arbeitsalltag, in dem man sich einer unsichtbaren Systemlogik anpassen muss.</p>
+                <p>Gerade in Plattformarbeit, Logistik, Callcentern oder digitalisierten Büros verschiebt sich dadurch Macht: Früher konnte man mit einer Führungskraft sprechen, heute steht oft ein schwer durchschaubarer Score dazwischen.</p>
             </div>
         </section>
 
-        <section class="content-card" data-icon="🎯">
+        <section class="content-card" data-icon="" id="arbeitswelt-recruiting">
             <div class="content-card-content">
-                <h3>Was können wir tun?</h3>
-                <p><strong>Lebenslange Weiterbildung:</strong> Fähigkeiten wie Kreativität, kritisches Denken und digitale Kompetenzen werden unverzichtbar.</p>
-                <p><strong>Soziale Sicherheit:</strong> Regierungen sollten Sicherheitsnetze wie Umschulungsprogramme und Grundeinkommen erwägen.</p>
-                <p><strong>Ethische Richtlinien:</strong> Unternehmen müssen verantwortungsvoll mit KI umgehen und Fairness sicherstellen.</p>
-                <p><strong>Zusammenarbeit Mensch-Maschine:</strong> Statt Konkurrenz: KI sollte menschliche Fähigkeiten ergänzen, nicht ersetzen.</p>
+                <h3>Recruiting und faire Chancen</h3>
+                <p>Auch Bewerbungsverfahren verändern sich. Unternehmen nutzen KI, um Lebensläufe zu sortieren, Kandidatinnen und Kandidaten vorzuschlagen oder formale Kriterien zu prüfen.</p>
+                <p>Die PDF nennt das bekannte Beispiel eines internen Recruiting-Systems von Amazon, das Bewerbungen mit bestimmten Hinweisen auf Frauen schlechter bewertete, weil es aus historisch männlich geprägten Daten gelernt hatte. Das zeigt: KI ist im Recruiting nicht automatisch fairer als Menschen. Sie kann alte Verzerrungen technisch verpackt weiterführen.</p>
+                <p>Für Bewerberinnen und Bewerber ist deshalb Transparenz zentral. Es muss erkennbar bleiben, ob ein Mensch die Bewerbung gesehen hat und ob ein System nur sortiert oder bereits bewertet.</p>
+            </div>
+        </section>
+
+        <section class="content-card" data-icon="">
+            <div class="content-card-content">
+                <h3>Was für eine faire Gestaltung nötig ist</h3>
+                <p><strong>Mitbestimmung:</strong> Beschäftigte, Betriebsräte und Arbeitnehmervertretungen müssen informiert werden, wenn KI Arbeit bewertet oder steuert.</p>
+                <p><strong>Überprüfbare Entscheidungen:</strong> Wichtige Bewertungen dürfen nicht als Black Box im Raum stehen, sondern müssen erklärt und korrigiert werden können.</p>
+                <p><strong>Gerechte Weiterbildung:</strong> KI-Kompetenz darf nicht nur für ohnehin privilegierte Gruppen erreichbar sein. Unternehmen und Staat müssen Übergänge aktiv unterstützen.</p>
+                <p><strong>Zwischenfazit:</strong> KI kann Arbeit sinnvoll verändern, wenn Vorteile nicht nur bei Unternehmen ankommen, sondern Beschäftigte beteiligt, geschützt und weitergebildet werden.</p>
             </div>
         </section>
     </main>

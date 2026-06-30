@@ -11,21 +11,10 @@
     <nav class="navbar">
         <div class="container">
                         <h1 class="logo">
-                            <span class="logo-icon" aria-label="Roboter" title="KI Roboter">
-                                <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:8px;">
-                                    <rect x="6" y="10" width="20" height="14" rx="6" fill="#6C63FF"/>
-                                    <rect x="12" y="20" width="8" height="6" rx="2" fill="#FFD966"/>
-                                    <circle cx="11" cy="17" r="2" fill="#fff"/>
-                                    <circle cx="21" cy="17" r="2" fill="#fff"/>
-                                    <rect x="14.5" y="6" width="3" height="4" rx="1.5" fill="#6C63FF"/>
-                                    <rect x="4" y="14" width="2" height="6" rx="1" fill="#6C63FF"/>
-                                    <rect x="26" y="14" width="2" height="6" rx="1" fill="#6C63FF"/>
-                                </svg>
-                            </span>
                             <a href="../index.html">Un/Frieden und KI</a>
                         </h1>
             <div class="nav-right">
-              <button class="search-btn" id="nav-search-btn" aria-label="Suche ausführen">🔍</button>
+              <button class="search-btn" id="nav-search-btn" aria-label="Suche ausführen">Suche</button>
               <div id="search-modal" class="search-modal hidden">
                 <div class="search-modal-content">
                   <div class="search-modal-header">
@@ -35,7 +24,7 @@
                   <div id="search-suggestions" class="search-suggestions"></div>
                 </div>
               </div>
-              <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">🌙</button>
+              <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">Modus</button>
             </div>
             <ul class="nav-links" id="nav-links">
                 <li><a href="../index.html">Home</a></li>
@@ -57,86 +46,88 @@
     <header class="hero">
         <div class="container">
             <h2>KI in der Politik</h2>
-            <p>Wie beeinflusst Künstliche Intelligenz Entscheidungen und Demokratie?</p>
+            <p>Wie KI Verwaltung, staatliche Entscheidungen und demokratische Kontrolle verändert.</p>
         </div>
         <!-- Matrix-Background für Hero -->
         <canvas id="matrix-bg" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0.18;"></canvas>
     </header>
 
     <main class="container">
-        <section class="content-card" data-icon="🏛️">
+        <section class="content-card" data-icon="">
             <div class="content-card-content">
-                <h3>Einführung</h3>
-                <p>KI spielt eine wachsende Rolle in der Politik: von Datenanalyse für Wahlen bis hin zu ethischen Fragen bei Entscheidungsfindung.</p>
+                <h3>Warum dieser Bereich besonders sensibel ist</h3>
+                <p>Im staatlichen Bereich geht es nicht nur um Technik, sondern um Rechte, Pflichten, Geld, Sicherheit und Zugang zu öffentlichen Leistungen. Genau deshalb gelten hier strengere Maßstäbe als bei vielen privaten KI-Anwendungen. Wenn eine Behörde Menschen falsch einordnet, können Betroffene nicht einfach zu einem anderen Anbieter wechseln.</p>
+                <p>Die PDF zeigt dabei ein klares Spannungsfeld: KI kann Verfahren beschleunigen, Informationen besser strukturieren und Verwaltungen entlasten. Gleichzeitig wird sie problematisch, wenn Entscheidungen intransparent werden, alte Ungleichheiten aus Daten übernommen werden oder Verantwortung zwischen Behörde, Software und Anbietern verschwimmt.</p>
             </div>
         </section>
 
         <section class="applications-section">
-            <h3>KI-Anwendungen in der Politik</h3>
+            <h3>Wo KI in Politik und Verwaltung eingesetzt wird</h3>
             <div class="app-cards">
-                <div class="app-card">
-                    <h4>Wahlprognosen</h4>
-                    <p>KI analysiert Daten für präzise Vorhersagen.</p>
-                </div>
-                <div class="app-card">
-                    <h4>Politikberatung</h4>
-                    <p>Unterstützung bei Gesetzesentwürfen und Analysen.</p>
-                </div>
-                <div class="app-card">
-                    <h4>Überwachung</h4>
-                    <p>KI zur Erkennung von Fake News und Desinformation.</p>
-                </div>
-                <div class="app-card">
-                    <h4>Ethik</h4>
-                    <p>Diskussion über faire und transparente KI in der Politik.</p>
-                </div>
+                <a class="app-card" href="#politik-chancen">
+                    <h4>Dokumente und Anträge</h4>
+                    <p>KI kann Unterlagen sortieren, fehlende Angaben erkennen, Übersetzungen unterstützen und einfache Bürgeranfragen beantworten.</p>
+                </a>
+                <a class="app-card" href="#politik-compas">
+                    <h4>Risikobewertung</h4>
+                    <p>In Sozialverwaltung, Steuerprüfung, Polizei oder Justiz kann KI Fälle priorisieren, Auffälligkeiten markieren oder Risiken einschätzen.</p>
+                </a>
+                <a class="app-card" href="#politik-chancen">
+                    <h4>Ressourcensteuerung</h4>
+                    <p>Große Datenmengen aus Verwaltung, Verkehr oder Versorgung lassen sich strukturieren, um öffentliche Leistungen besser zu planen.</p>
+                </a>
+                <a class="app-card" href="#politik-demokratie">
+                    <h4>Digitale Bürgerdienste</h4>
+                    <p>Verständlichere digitale Hilfen können den Zugang zu Verwaltung erleichtern, wenn sie nachvollziehbar und fair bleiben.</p>
+                </a>
             </div>
         </section>
 
-        <section class="content-card" data-icon="💪">
+        <section class="content-card" data-icon="" id="politik-chancen">
             <div class="content-card-content">
-                <h3>Chancen: KI für bessere Governance</h3>
-                <p><strong>Datengestützte Entscheidungen:</strong> KI-Analysen helfen Politikern, fundierte Entscheidungen zu treffen und Probleme präsenter anzusprechen.</p>
-                <p><strong>Effizienz und Kosteneinsparungen:</strong> Automation von Verwaltungsaufgaben spart öffentliche Ressourcen und Zeit.</p>
-                <p><strong>Bürgerbeteiligung:</strong> KI-Chatbots und intelligente Systeme ermöglichen Bürgern, mit Regierungen in Kontakt zu treten und Informationen schneller zu erhalten.</p>
-                <p><strong>Infrastrukturoptimierung:</strong> KI hilft bei der Planung von Verkehr, Energie und Stadtentwicklung für smarte Städte.</p>
+                <h3>Chancen: Entlastung, Vorbereitung und schnellere Verfahren</h3>
+                <p><strong>Entlastung im Alltag:</strong> Viele Verwaltungsschritte wiederholen sich. Wenn KI Routinen übernimmt, bleibt mehr Zeit für Fälle, die Beratung, Erfahrung und individuelle Prüfung brauchen.</p>
+                <p><strong>Bessere Vorbereitung:</strong> KI kann große Datenmengen strukturieren und Entwicklungen früher sichtbar machen, etwa bei überlasteten Dienstleistungen oder bei der Verteilung öffentlicher Ressourcen.</p>
+                <p><strong>Konkreter Nutzen für Bürgerinnen und Bürger:</strong> Schnellere Verfahren können soziale Folgen haben. Wenn Anträge zügiger bearbeitet werden, ist das nicht nur technisch, sondern oft auch gesellschaftlich relevant.</p>
+                <p><strong>Hilfsmittel statt Ersatz:</strong> Laut PDF kann KI Verwaltung verbessern, solange sie für Routine, Übersetzung, Strukturierung und Vorbereitung genutzt wird und nicht die demokratische Verantwortung ersetzt.</p>
             </div>
         </section>
 
-        <section class="content-card" data-icon="⚡">
+        <section class="content-card" data-icon="">
             <div class="content-card-content">
-                <h3>Risiken und ethische Bedenken</h3>
-                <p><strong>Algorithmen-Bias:</strong> Begrifflich trainierte KI-Systeme können historische Vorurteile verfestigen und zu unfairer Politikgestaltung führen.</p>
-                <p><strong>Überwachung und Privatsphäre:</strong> Massive Datensammlung durch KI-Systeme birgt Missbrauchspotenzial und bedroht Grundrechte.</p>
-                <p><strong>Machtverhältnisse:</strong> Tech-Konzerne, die KI-Systeme kontrollieren, gewinnen enormen Einfluss auf politische Entscheidungen.</p>
-                <p><strong>Manipulation:</strong> KI-gesteuerte Desinformationskampagnen können Wahlen beeinflussen und die Demokratie untergraben.</p>
+                <h3>Risiken: Intransparenz, Bias und Verantwortungsverlust</h3>
+                <p><strong>Intransparenz:</strong> Im Staat reicht ein Ergebnis allein nicht aus. Bürgerinnen und Bürger müssen verstehen können, warum ein Antrag abgelehnt oder ein Fall als riskant markiert wurde.</p>
+                <p><strong>Bias in Verwaltungsdaten:</strong> Daten entstehen nicht neutral. Frühere Kontrollen, politische Prioritäten und soziale Ungleichheiten können in Datensätzen stecken und durch KI erneut verstärkt werden.</p>
+                <p><strong>Verantwortungsverlust:</strong> Problematisch wird es, wenn Entwickler auf Daten verweisen, Behörden auf Software verweisen und Mitarbeitende nur noch dem System folgen. Für Betroffene bleibt dann unklar, wer eigentlich verantwortlich ist.</p>
+                <p><strong>Gefahr für Vertrauen:</strong> Wenn der Staat Menschen durch ein intransparentes System falsch behandelt, wird aus Verwaltungstechnik schnell ein Problem für Legitimität und gesellschaftlichen Frieden.</p>
             </div>
         </section>
 
-        <section class="content-card" data-icon="🌐">
+        <section class="content-card" data-icon="" id="politik-compas">
             <div class="content-card-content">
-                <h3>Internationale Beispiele</h3>
-                <p><strong>Estland:</strong> Nutzt KI für e-Government-Dienste und digitale Bürgerbeteiligung.</p>
-                <p><strong>Singapur:</strong> Setzt auf AI-gesteuerte Planung für urbane Entwicklung und Verkehrsmanagement.</p>
-                <p><strong>USA und EU:</strong> Entwickeln KI-Regulierungsrahmen wie den EU AI Act und AI Bill of Rights.</p>
-                <p><strong>Deutschland:</strong> Investiert in KI-Forschung für soziale Gerechtigkeit und digitale Souveränität.</p>
+                <h3>Fallbeispiel: COMPAS</h3>
+                <p>Die PDF beschreibt COMPAS als bekanntes Beispiel aus Teilen der US-Justiz. Dort wurden Risikoscores genutzt, die Entscheidungen über Bewährung, Haft oder Strafmaß beeinflussen konnten.</p>
+                <p>Wichtig daran ist nicht nur ein einzelner Fehler, sondern das Grundproblem: Ein mathematisches System kann die Wahrnehmung eines Menschen verändern, obwohl es nur "unterstützt". Gerade in Bereichen, in denen Freiheit und Grundrechte betroffen sind, reicht eine technische Wahrscheinlichkeit nicht als gerechte Begründung aus.</p>
+                <p>Die Kontroverse zeigt außerdem, dass Fairness nicht einfach eine Zahl ist. Unterschiedliche statistische Maßstäbe können zu unterschiedlichen Urteilen führen. Genau deshalb darf ein Betroffener nicht allein mit einem undurchsichtigen Risikowert konfrontiert werden.</p>
             </div>
         </section>
 
-        <section class="content-card" data-icon="⚖️">
+        <section class="content-card" data-icon="">
             <div class="content-card-content">
-                <h3>Regulierung und Governance</h3>
-                <p><strong>Transparenz:</strong> Regierungen müssen offenlegen, wie KI-Systeme funktionieren und welche Daten sie verwenden.</p>
-                <p><strong>Rechenschaftspflicht:</strong> Es muss klare Verantwortung geben, wenn KI-Systeme zu unfairen oder schadhaften politischen Entscheidungen führen.</p>
-                <p><strong>Partizipation:</strong> Bürger sollten in die Gestaltung von KI-Politiken miteinbezogen werden, nicht nur von Experten entschieden.</p>
-                <p><strong>Internationale Standards:</strong> Globale Kooperation bei der Regulierung von KI ist wichtig, um Missbrauch zu verhindern und Ethik zu sichern.</p>
+                <h3>Fallbeispiel: Toeslagenaffaire in den Niederlanden</h3>
+                <p>Besonders deutlich wird die Gefahr in der niederländischen Toeslagenaffaire. Dort wurden viele Familien im Zusammenhang mit Kinderbetreuungszuschüssen durch algorithmische Risikoprofile falsch oder überhart des Betrugs verdächtigt.</p>
+                <p>Die Folgen waren nicht abstrakt: Rückforderungen, finanzielle Not, Stress und massiver Vertrauensverlust. Der Fall zeigt laut PDF, wie aus einem scheinbar technischen Kontrollinstrument ein soziales und politisches Problem wird, wenn Nationalität oder andere sensible Merkmale als Risikofaktoren in die Bewertung einfließen.</p>
+                <p>Gerade hier wird sichtbar, dass Verwaltung nicht nur effizient, sondern auch rechtsstaatlich, nachvollziehbar und korrigierbar bleiben muss.</p>
             </div>
         </section>
 
-        <section class="content-card" data-icon="🤝">
+        <section class="content-card" data-icon="" id="politik-demokratie">
             <div class="content-card-content">
-                <h3>Die Zukunft: Balance und Vertrauen</h3>
-                <p>Die Integration von KI in die Politik ist unvermeidbar. Der Schlüssel liegt jedoch in der Balance: Wir brauchen KI-Systeme, die transparent, fair und rechenschaftspflichtig sind. Gleichermaßen müssen wir Menschenrechte, Demokratie und persönliche Freiheit schützen, während wir die Vorteile der Technologie nutzen.</p>
+                <h3>Was für eine demokratische Nutzung nötig ist</h3>
+                <p><strong>Menschliche Kontrolle:</strong> Ein Mensch in der Entscheidung reicht nur dann, wenn dieser Mensch das System wirklich prüfen, widersprechen und Empfehlungen ablehnen kann.</p>
+                <p><strong>Eigene staatliche Kompetenz:</strong> Behörden dürfen Systeme nicht nur einkaufen, sondern müssen genug Wissen haben, um Daten, Ziele und Risiken selbst beurteilen zu können.</p>
+                <p><strong>Klare Regeln:</strong> Je stärker KI in Rechte, Chancen oder Sicherheit eingreift, desto strenger müssen Dokumentation, Datenqualität, Transparenz und Aufsicht sein.</p>
+                <p><strong>Zwischenfazit:</strong> KI kann staatliche Leistungen verbessern. Sie fördert aber nur dann Stabilität, wenn Verantwortung, Begründung und Widerspruchsmöglichkeiten erhalten bleiben.</p>
             </div>
         </section>
     </main>

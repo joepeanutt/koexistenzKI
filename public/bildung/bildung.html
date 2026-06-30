@@ -11,21 +11,10 @@
     <nav class="navbar">
         <div class="container">
                         <h1 class="logo">
-                            <span class="logo-icon" aria-label="Roboter" title="KI Roboter">
-                                <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; margin-right:8px;">
-                                    <rect x="6" y="10" width="20" height="14" rx="6" fill="#6C63FF"/>
-                                    <rect x="12" y="20" width="8" height="6" rx="2" fill="#FFD966"/>
-                                    <circle cx="11" cy="17" r="2" fill="#fff"/>
-                                    <circle cx="21" cy="17" r="2" fill="#fff"/>
-                                    <rect x="14.5" y="6" width="3" height="4" rx="1.5" fill="#6C63FF"/>
-                                    <rect x="4" y="14" width="2" height="6" rx="1" fill="#6C63FF"/>
-                                    <rect x="26" y="14" width="2" height="6" rx="1" fill="#6C63FF"/>
-                                </svg>
-                            </span>
                             <a href="../index.html">Un/Frieden und KI</a>
                         </h1>
             <div class="nav-right">
-              <button class="search-btn" id="nav-search-btn" aria-label="Suche ausführen">🔍</button>
+              <button class="search-btn" id="nav-search-btn" aria-label="Suche ausführen">Suche</button>
               <div id="search-modal" class="search-modal hidden">
                 <div class="search-modal-content">
                   <div class="search-modal-header">
@@ -35,7 +24,7 @@
                   <div id="search-suggestions" class="search-suggestions"></div>
                 </div>
               </div>
-              <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">🌙</button>
+              <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Dark Mode umschalten">Modus</button>
             </div>
             <ul class="nav-links" id="nav-links">
                 <li><a href="../index.html">Home</a></li>
@@ -57,79 +46,79 @@
     <header class="hero">
         <div class="container">
             <h2>KI in der Bildung</h2>
-            <p>Wie revolutioniert Künstliche Intelligenz das Lernen und Lehren?</p>
+            <p>Wie KI Lernen unterstützt, aber auch neue Ungleichheiten in der Bildung schaffen kann.</p>
         </div>
         <!-- Matrix-Background für Hero -->
         <canvas id="matrix-bg" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0.18;"></canvas>
     </header>
 
     <main class="container">
-        <section class="content-card" data-icon="🎓">
+        <section class="content-card" data-icon="">
             <div class="content-card-content">
-                <h3>Einführung</h3>
-                <p>KI personalisiert Lernprozesse, bietet adaptive Tutoren und analysiert Lernfortschritte. Sie macht Bildung zugänglicher und effizienter.</p>
+                <h3>Warum Bildung ein besonders sensibler Bereich ist</h3>
+                <p>Bildung entscheidet über Teilhabe, Selbstbestimmung und Zukunftschancen. Genau deshalb ist KI hier nicht nur ein praktisches Werkzeug, sondern auch eine Gerechtigkeitsfrage. Laut PDF kann KI zusätzliche Unterstützung, Barrierefreiheit und individuelle Förderung ermöglichen, sie kann aber auch digitale Spaltung und neue Abhängigkeiten verstärken.</p>
+                <p>Besonders wichtig ist der Unterschied zwischen hilfreicher Unterstützung und dem Ersatz eigener Lernprozesse. Die gleiche Technik kann Erklären, Fördern und Barrieren abbauen, aber auch dazu führen, dass nur noch fertige Ergebnisse produziert werden, ohne dass echtes Verständnis entsteht.</p>
             </div>
         </section>
 
         <section class="applications-section">
-            <h3>KI-Anwendungen in der Bildung</h3>
+            <h3>Wo KI im Bildungsbereich eingesetzt wird</h3>
             <div class="app-cards">
-                <div class="app-card">
-                    <h4>Personalisierte Lernpläne</h4>
-                    <p>KI passt Inhalte an individuelle Bedürfnisse an.</p>
-                </div>
-                <div class="app-card">
-                    <h4>Intelligente Tutoren</h4>
-                    <p>24/7 verfügbare KI-gestützte Lernhilfen.</p>
-                </div>
-                <div class="app-card">
-                    <h4>Automatisierte Bewertung</h4>
-                    <p>Schnelle Korrektur von Tests und Aufgaben.</p>
-                </div>
-                <div class="app-card">
-                    <h4>Zugänglichkeit</h4>
-                    <p>KI unterstützt Lernende mit besonderen Bedürfnissen.</p>
-                </div>
+                <a class="app-card" href="#bildung-chancen">
+                    <h4>Adaptive Lernsysteme</h4>
+                    <p>Aufgaben und Erklärungen passen sich dem Lernstand und dem Unterstützungsbedarf an.</p>
+                </a>
+                <a class="app-card" href="#bildung-lernen">
+                    <h4>KI-Tutoren und Chatbots</h4>
+                    <p>Fragen werden direkt beantwortet und schwierige Inhalte verständlicher erklärt.</p>
+                </a>
+                <a class="app-card" href="#bildung-chancen">
+                    <h4>Barrierefreiheit</h4>
+                    <p>Vorlesen, Übersetzen und Umwandeln von Sprache können Teilhabe verbessern.</p>
+                </a>
+                <a class="app-card" href="#bildung-verantwortung">
+                    <h4>Lehrkräfteunterstützung</h4>
+                    <p>KI hilft bei Material, Ideen und organisatorischen Aufgaben im Unterricht.</p>
+                </a>
             </div>
         </section>
 
-        <section class="content-card" data-icon="✨">
+        <section class="content-card" data-icon="" id="bildung-chancen">
             <div class="content-card-content">
-                <h3>Vorteile der KI im Klassenzimmer</h3>
-                <p><strong>Individuelle Lernwege:</strong> KI analysiert den Lernfortschritt und passt das Schwierigkeitsniveau automatisch an das Tempo des Schülers an.</p>
-                <p><strong>Feedback in Echtzeit:</strong> Intelligente Systeme geben sofortiges Feedback zu Aufgaben und helfen Schülern, ihre Fehler zu verstehen.</p>
-                <p><strong>Lehrerunterstützung:</strong> KI übernimmt administrative Aufgaben wie Notenverwaltung, was Lehrkräften mehr Zeit für Unterricht gibt.</p>
-                <p><strong>Rund-um-die-Uhr-Unterstützung:</strong> Digitale Tutoren stehen Schülern außerhalb des Unterrichts verfügbar, besonders für Hausaufgaben.</p>
+                <h3>Chancen: Förderung, Unterstützung und Barriereabbau</h3>
+                <p><strong>Individuelle Lernwege:</strong> In Klassen lernen Menschen unterschiedlich schnell. KI kann zusätzliche Erklärungen, Wiederholungen oder anspruchsvollere Aufgaben bereitstellen.</p>
+                <p><strong>Zusätzliche Hilfe im Alltag:</strong> Gerade bei Hausaufgaben oder beim Verstehen schwieriger Texte kann ein KI-System schnell Unterstützung geben, ohne auf die nächste Unterrichtsstunde warten zu müssen.</p>
+                <p><strong>Mehr Teilhabe:</strong> Die PDF betont besonders den Nutzen für Lernende mit Behinderung oder mit anderer Erstsprache. Vorlesefunktionen, Übersetzungen und sprachliche Vereinfachung können echte Barrieren abbauen.</p>
+                <p><strong>Unterstützung für Lehrkräfte:</strong> KI kann Material vorbereiten und differenzieren, aber nicht die pädagogische Arbeit ersetzen. Beziehung, Motivation und Einordnung bleiben menschliche Aufgaben.</p>
             </div>
         </section>
 
-        <section class="content-card" data-icon="🔒">
+        <section class="content-card" data-icon="">
             <div class="content-card-content">
-                <h3>Herausforderungen und Bedenken</h3>
-                <p><strong>Digitale Spaltung:</strong> Nicht alle Schulen und Schüler haben gleichen Zugang zu KI-Technologien und stabiler Internetverbindung.</p>
-                <p><strong>Datenschutz:</strong> Das Sammeln und Speichern von Schülerdaten wirft wichtige Fragen zu Privatsphäre und Datensicherheit auf.</p>
-                <p><strong>Menschliche Interaktion:</strong> Zu viel Abhängigkeit von KI könnte wichtige soziale Fähigkeiten und persönliche Entwicklung beeinträchtigen.</p>
-                <p><strong>Qualität und Genauigkeit:</strong> Nicht alle KI-Systeme liefern korrekte oder angemessene pädagogische Inhalte.</p>
+                <h3>Risiken: Digitale Spaltung und neue Ungleichheiten</h3>
+                <p><strong>Ungleiche Ausstattung:</strong> Nicht alle Familien und Schulen haben dieselben Geräte, dieselbe Internetverbindung oder dieselbe Vorbereitung. Wird KI einfach in ein ungleiches System eingeführt, verstärkt sie diese Unterschiede leicht.</p>
+                <p><strong>Ungleiche Kompetenz:</strong> Wer bereits sprachlich, fachlich und digital sicher ist, kann KI oft besser nutzen. Dadurch profitieren nicht automatisch die Schwächeren zuerst.</p>
+                <p><strong>Kostenpflichtige Vorteile:</strong> Leistungsstärkere oder bezahlte KI-Angebote können zu einer neuen Form von Nachhilfeungleichheit führen.</p>
+                <p><strong>Pädagogische Schieflage:</strong> Wenn KI nur Ergebnisse produziert, statt beim Verstehen zu helfen, wird Lernen oberflächlicher statt gerechter.</p>
             </div>
         </section>
 
-        <section class="content-card" data-icon="🌍">
+        <section class="content-card" data-icon="" id="bildung-lernen">
             <div class="content-card-content">
-                <h3>Praktische Einsatzbeispiele</h3>
-                <p><strong>Duolingo:</strong> Eine App, die KI nutzt, um Sprachenlernen zu personalisieren und zu gamifizieren.</p>
-                <p><strong>Khan Academy:</strong> Bietet adaptive Lernpfade basierend auf Student-Performance-Analysen.</p>
-                <p><strong>IBM WATSON Tutor:</strong> Ein intelligentes Tutoring-System für Mathematik und naturwissenschaftliche Fächer.</p>
-                <p><strong>ALEKS (Knewton):</strong> Adaptive Learning System für Mathematik, das Wissenslücken identifiziert und behebt.</p>
+                <h3>Lernen oder nur Ergebnisse produzieren?</h3>
+                <p>Ein zentrales Problem aus der PDF ist die Frage, ob KI beim Lernen hilft oder den Lernprozess ersetzt. Wer sich eine schwierige Stelle erklären lässt, nutzt ein Werkzeug. Wer einen fertigen Text abgibt, den er nicht verstanden hat, überspringt den eigentlichen Lernweg.</p>
+                <p>Deshalb wird vorgeschlagen, stärker zwischen Lernphase und Leistungsnachweis zu unterscheiden. In der Lernphase kann KI erlaubt und reflektiert genutzt werden. Bei Leistungsnachweisen muss klar bleiben, welche eigene Leistung bewertet wird.</p>
+                <p>Hinzu kommt: Generative KI kann falsche Informationen sehr überzeugend formulieren. Lernende müssen also auch lernen, Ergebnisse zu prüfen, Quellen zu vergleichen und sprachlich glatte Antworten nicht automatisch für wahr zu halten.</p>
             </div>
         </section>
 
-        <section class="content-card" data-icon="🚀">
+        <section class="content-card" data-icon="" id="bildung-verantwortung">
             <div class="content-card-content">
-                <h3>Zukunft der KI-gestützten Bildung</h3>
-                <p><strong>Hybridmodell:</strong> Die beste Bildung kombiniert KI-gestützte Technologie mit menschlichen Lehrern, die Unterstützung, Motivation und emotionale Intelligenz bieten.</p>
-                <p><strong>Lebenslanges Lernen:</strong> KI ermöglicht es Erwachsenen, neue Fähigkeiten zu erlernen und ihre Karriere zu transformieren.</p>
-                <p><strong>Globaler Zugang:</strong> KI kann Bildung in unterversorgten Regionen demokratisieren und allen Zugang zu hochwertigen Lehrmöglichkeiten bieten.</p>
-                <p><strong>Natürliche Spracheninteraktion:</strong> Fortgeschrittene KI könnte Unterricht durch mündliche Diskussionen und Fragen-Beantwortungs-Systeme noch intuitiver machen.</p>
+                <h3>Bewertung, Datenschutz und Verantwortung</h3>
+                <p><strong>Automatisierte Bewertung:</strong> Laut PDF ist dieser Bereich besonders heikel. Noten beeinflussen Selbstbild, Versetzung und Zukunftschancen. KI darf hier höchstens unterstützen, aber nicht als Black Box über Leistungen entscheiden.</p>
+                <p><strong>Schutz von Kindern und Jugendlichen:</strong> Lernplattformen können Fehler, Fortschritt und Arbeitsverhalten speichern. Gerade bei Minderjährigen muss deshalb klar sein, welche Daten gesammelt werden, wer sie sieht und wie lange sie gespeichert bleiben.</p>
+                <p><strong>Rolle der Lehrkräfte:</strong> Lehrkräfte werden durch KI nicht überflüssig. Ihre Aufgabe wird sogar wichtiger: Sie müssen begleiten, einordnen, Regeln setzen und Urteilskraft vermitteln.</p>
+                <p><strong>Zwischenfazit:</strong> KI kann Bildung gerechter machen, wenn Zugang, Datenschutz, Lehrkräftefortbildung und echtes Lernen im Mittelpunkt bleiben. Ohne diese Bedingungen verstärkt sie Ungleichheit eher, als sie zu verringern.</p>
             </div>
         </section>
     </main>

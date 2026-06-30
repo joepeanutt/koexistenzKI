@@ -1,12 +1,12 @@
 :root {
-  --bg: #030805;
-  --panel: rgba(8, 18, 12, 0.9);
-  --panel-border: rgba(0, 255, 65, 0.28);
+  --bg: #0a1628;
+  --panel: rgba(15, 30, 56, 0.9);
+  --panel-border: rgba(43, 108, 176, 0.28);
   --text: #e8ffe9;
-  --muted: #9ed8a8;
-  --accent: #00ff41;
+  --muted: #a8c5d8;
+  --accent: #2b6cb0;
   --danger: #ff4d4d;
-  --ok: #00ff41;
+  --ok: #2b6cb0;
 }
 
 * {
@@ -18,8 +18,8 @@ body {
   font-family: "Segoe UI", "Inter", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at 10% 20%, rgba(0, 255, 65, 0.08), transparent 28%),
-    radial-gradient(circle at 90% 0%, rgba(0, 255, 65, 0.06), transparent 24%),
+    radial-gradient(circle at 10% 20%, rgba(43, 108, 176, 0.08), transparent 28%),
+    radial-gradient(circle at 90% 0%, rgba(43, 108, 176, 0.06), transparent 24%),
     var(--bg);
   min-height: 100vh;
 }
@@ -43,11 +43,11 @@ body {
   border: 1px solid var(--panel-border);
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(0, 255, 65, 0.08);
+  background: rgba(43, 108, 176, 0.08);
 }
 
 .back-link:hover {
-  background: rgba(0, 255, 65, 0.16);
+  background: rgba(43, 108, 176, 0.16);
 }
 
 .quiz-header h1 {
@@ -82,7 +82,7 @@ body {
   height: 10px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(0, 255, 65, 0.24);
+  border: 1px solid rgba(43, 108, 176, 0.24);
   overflow: hidden;
   margin-bottom: 20px;
 }
@@ -90,7 +90,7 @@ body {
 .progress-fill {
   width: 10%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(0, 255, 65, 0.72), #00ff41);
+  background: linear-gradient(90deg, rgba(43, 108, 176, 0.72), #2b6cb0);
   transition: width 0.32s ease;
 }
 
@@ -109,8 +109,8 @@ body {
   width: 100%;
   text-align: left;
   border-radius: 12px;
-  border: 1px solid rgba(0, 255, 65, 0.26);
-  background: rgba(0, 255, 65, 0.06);
+  border: 1px solid rgba(43, 108, 176, 0.26);
+  background: rgba(43, 108, 176, 0.06);
   color: var(--text);
   padding: 12px 14px;
   font-size: 0.96rem;
@@ -120,8 +120,8 @@ body {
 
 .answer-btn:hover:not(:disabled) {
   transform: translateY(-1px);
-  border-color: rgba(0, 255, 65, 0.54);
-  background: rgba(0, 255, 65, 0.13);
+  border-color: rgba(43, 108, 176, 0.54);
+  background: rgba(43, 108, 176, 0.13);
 }
 
 .answer-btn:disabled {
@@ -130,8 +130,8 @@ body {
 }
 
 .answer-btn.correct {
-  border-color: rgba(0, 255, 65, 0.9);
-  background: rgba(0, 255, 65, 0.2);
+  border-color: rgba(43, 108, 176, 0.9);
+  background: rgba(43, 108, 176, 0.2);
   animation: answerCorrect 360ms ease;
 }
 
@@ -152,8 +152,8 @@ body {
 }
 
 .feedback.ok {
-  border-color: rgba(0, 255, 65, 0.52);
-  background: rgba(0, 255, 65, 0.12);
+  border-color: rgba(43, 108, 176, 0.52);
+  background: rgba(43, 108, 176, 0.12);
 }
 
 .feedback.bad {
@@ -173,9 +173,9 @@ body {
   border-radius: 12px;
   padding: 10px 14px;
   cursor: pointer;
-  color: #001c0c;
+  color: #e8ffe9;
   font-weight: 700;
-  background: linear-gradient(145deg, #00ff41, #57ff88);
+  background: linear-gradient(145deg, #2b6cb0, #3d8ec9);
   transition: transform 0.18s ease, filter 0.18s ease;
 }
 

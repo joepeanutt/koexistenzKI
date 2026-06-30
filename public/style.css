@@ -2,11 +2,16 @@
 :root {
     --bg-color: #f0f2f5;
     --text-color: #333;
-    --navbar-bg: #1a202c;
-    --navbar-text: white;
+    --navbar-bg: #ffffff;
+    --navbar-text: #1a202c;
+    --navbar-border: #e0e0e0;
     --hero-bg: linear-gradient(135deg, #2b6cb0 0%, #2d3748 100%);
     --card-bg: white;
-    --card-shadow: rgba(0,0,0,0.05);
+    --card-shadow: rgba(0,0,0,0.08);
+    --link-color: #2b6cb0;
+    --link-hover: #1a4d8a;
+    --border-color: rgba(43, 108, 176, 0.2);
+    --secondary-text: #666;
 }
 
 #scroll-progress {
@@ -26,6 +31,19 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
+    scroll-behavior: smooth;
+}
+
+img,
+video,
+canvas,
+iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+section[id] {
+    scroll-margin-top: 104px;
 }
 
 .dark-mode {
@@ -33,28 +51,22 @@ body {
     --text-color: #e2e8f0;
     --navbar-bg: #2d3748;
     --navbar-text: #e2e8f0;
+    --navbar-border: rgba(255,255,255,0.1);
     --hero-bg: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
     --card-bg: #4a5568;
     --card-shadow: rgba(0,0,0,0.3);
+    --link-color: #6ba3ff;
+    --link-hover: #8bb9ff;
+    --border-color: rgba(255,255,255,0.15);
+    --secondary-text: #cbd5e0;
 }
 
 .container {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Navbar & Dropdown */
-.navbar {
-    background: linear-gradient(135deg, #121417 0%, #2d4353 100%);
-    color: var(--navbar-text);
-    padding: 15px 0;
-    transition: background 0.35s ease;
-    border-bottom: 2px solid rgba(255,255,255,0.15);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    position: relative;
-    z-index: 2500;
-    overflow: visible;
+    padding: 0 24px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .navbar-content {
@@ -73,7 +85,7 @@ body {
 }
 
 .admin-entry-link {
-    color: #d7deea;
+    color: var(--link-color);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -81,8 +93,8 @@ body {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-color);
+    background: rgba(43, 108, 176, 0.08);
     font-size: 0.95rem;
     line-height: 1;
     margin-left: -12px;
@@ -92,8 +104,8 @@ body {
 
 .admin-entry-link:hover {
     transform: translateY(-1px);
-    background: rgba(255, 255, 255, 0.14);
-    border-color: rgba(255, 255, 255, 0.36);
+    background: rgba(43, 108, 176, 0.16);
+    border-color: var(--link-color);
 }
 
 
@@ -183,7 +195,7 @@ body {
 .nav-search-input {
     background: transparent;
     border: none;
-    color: white;
+    color: var(--navbar-text);
     outline: none;
     width: 140px;
     font-size: 0.9rem;
@@ -192,7 +204,7 @@ body {
 }
 
 .nav-search-input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--secondary-text);
 }
 
 .nav-search-input:focus {
@@ -200,27 +212,30 @@ body {
 }
 
 .search-btn {
-    background: linear-gradient(135deg, rgba(108, 99, 255, 0.15), rgba(29, 161, 242, 0.15));
-    border: 1.5px solid rgba(108, 99, 255, 0.4);
-    color: rgba(255, 255, 255, 0.9);
+    background: rgba(43, 108, 176, 0.1);
+    border: 1.5px solid rgba(43, 108, 176, 0.3);
+    color: var(--link-color);
     cursor: pointer;
-    font-size: 1.2rem;
-    padding: 8px 10px;
-    border-radius: 10px;
+    font-size: 0.95rem;
+    padding: 0 14px;
+    border-radius: 12px;
     transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    min-width: 44px;
+    min-height: 44px;
+    width: auto;
+    height: 44px;
+    font-weight: 600;
 }
 
 .search-btn:hover {
-    color: white;
+    color: var(--link-hover);
     transform: scale(1.15);
-    background: linear-gradient(135deg, rgba(108, 99, 255, 0.3), rgba(29, 161, 242, 0.3));
-    border-color: rgba(108, 99, 255, 0.7);
-    box-shadow: 0 8px 16px rgba(108, 99, 255, 0.25);
+    background: rgba(43, 108, 176, 0.2);
+    border-color: var(--link-color);
+    box-shadow: 0 8px 16px rgba(43, 108, 176, 0.15);
 }
 
 .search-btn:active {
@@ -394,26 +409,26 @@ body {
 }
 
 .nav-links a {
-    color: #cbd5e0;
+    color: var(--navbar-text);
     text-decoration: none;
     transition: color 0.3s, transform 0.3s, background 0.3s, border-color 0.3s;
     position: relative;
     padding: 8px 12px;
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    background: rgba(43, 108, 176, 0.05);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 36px;
+    min-height: 44px;
     box-sizing: border-box;
 }
 
 .nav-links a:hover {
-    color: white;
+    color: var(--link-hover);
     transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(43, 108, 176, 0.1);
+    border-color: var(--link-color);
 }
 
 /* Hamburger Menu */
@@ -425,15 +440,15 @@ body {
     align-items: center;
     width: 42px;
     height: 42px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(43, 108, 176, 0.05);
     transition: all 0.3s ease;
 }
 
 .hamburger:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(43, 108, 176, 0.1);
+    border-color: var(--link-color);
 }
 
 .hamburger span {
@@ -465,8 +480,8 @@ body {
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -522,20 +537,21 @@ body.dark-mode .dark-mode-toggle:hover {
 .dropdown-menu {
     display: none;
     position: absolute;
-    background: #2d3748;
+    background: var(--card-bg);
     top: 100%;
     left: 0;
     list-style: none;
     padding: 10px 0;
     border-radius: 8px;
     min-width: 200px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 20px var(--card-shadow);
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 1000;
     visibility: hidden;
     pointer-events: none;
+    border: 1px solid var(--border-color);
 }
 
 .dropdown:hover .dropdown-menu,
@@ -554,7 +570,7 @@ body.dark-mode .dark-mode-toggle:hover {
 .dropdown-menu li a {
     padding: 12px 20px;
     display: block;
-    color: #e2e8f0;
+    color: var(--navbar-text);
     text-decoration: none;
     transition: background-color 0.2s ease, color 0.2s ease;
     border-radius: 4px;
@@ -562,8 +578,8 @@ body.dark-mode .dark-mode-toggle:hover {
 }
 
 .dropdown-menu li a:hover {
-    background-color: #4a5568;
-    color: white;
+    background-color: rgba(43, 108, 176, 0.15);
+    color: var(--link-color);
 }
 
 /* Styling für den Pfeil */
@@ -582,40 +598,27 @@ body.dark-mode .dark-mode-toggle:hover {
 
 /* Hero & Cards */
 .hero {
-    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    background: linear-gradient(135deg, #23426c 0%, #2d4f77 100%);
     color: white;
     padding: 100px 0;
     text-align: center;
     transition: background 0.5s ease;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: fadeInUp 0.9s ease-out 0.4s forwards;
-    border-bottom: 5px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.18);
     position: relative;
     overflow: hidden;
 }
 
-.hero::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none;
-  background:
-    repeating-linear-gradient(0deg, rgba(0,255,255,0.03) 0px, transparent 2px, transparent 4px, rgba(0,255,255,0.03) 6px);
-  animation: scanlines 8s linear infinite;
-  z-index: 1;
-}
-
-@keyframes scanlines {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(10px); }
+.hero > .container {
+    position: relative;
+    z-index: 2;
+    color: inherit;
 }
 
 .hero h2, .hero p {
   position: relative;
   z-index: 2;
-  text-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
 }
 
 @keyframes fadeInUp {
@@ -667,6 +670,7 @@ body.dark-mode .dark-mode-toggle:hover {
     letter-spacing: 0.02em;
     box-shadow: 0 12px 26px rgba(29, 161, 242, 0.24);
     transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+    min-height: 44px;
 }
 
 .timeline-button:hover {
@@ -943,6 +947,37 @@ body.dark-mode .dark-mode-toggle:hover {
     font-size: 3rem;
     margin-bottom: 10px;
     transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.team-photo-wrap {
+    width: 112px;
+    height: 112px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(107, 163, 255, 0.42);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+    background: #0f172a;
+}
+
+.team-photo {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transform: scale(1.08);
+}
+
+.team-photo-berat {
+    object-position: 50% 27%;
+}
+
+.team-photo-raul {
+    object-position: 50% 25%;
+}
+
+.team-photo-joel {
+    object-position: 50% 24%;
 }
 
 .avatar:hover {
@@ -2164,6 +2199,9 @@ body {
     background: rgba(18, 20, 30, 0.88);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255,255,255,0.12);
+    position: relative;
+    z-index: 4000;
+    overflow: visible;
 }
 
 .nav-links a {
@@ -2173,17 +2211,17 @@ body {
 }
 
 .nav-links a:hover {
-    color: #ffffff;
-    background: rgba(108, 99, 255, 0.22);
-    border-color: rgba(125, 117, 255, 0.42);
+    color: var(--link-hover);
+    background: rgba(43, 108, 176, 0.15);
+    border-color: var(--link-color);
 }
 
 .nav-links a.nav-active,
 .nav-links a.nav-active:hover {
-    color: #ffffff;
-    background: linear-gradient(135deg, rgba(108, 99, 255, 0.92), rgba(29, 161, 242, 0.92));
-    border-color: rgba(171, 209, 255, 0.78);
-    box-shadow: 0 8px 18px rgba(49, 119, 210, 0.32);
+    color: white;
+    background: linear-gradient(135deg, #2b6cb0, #1a4d8a);
+    border-color: #2b6cb0;
+    box-shadow: 0 8px 18px rgba(43, 108, 176, 0.25);
 }
 
 body.dark-mode .nav-links a.nav-active,
@@ -2194,18 +2232,19 @@ body.dark-mode .nav-links a.nav-active:hover {
 }
 
 .dropdown-menu {
-    background: rgba(21, 24, 40, 0.98);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     backdrop-filter: blur(10px);
+    z-index: 4100;
 }
 
 .dropdown-menu li a {
-    color: #e5e9ff;
+    color: var(--navbar-text);
 }
 
 .dropdown-menu li a:hover {
-    background: rgba(108, 99, 255, 0.24);
-    color: #ffffff;
+    background: rgba(43, 108, 176, 0.15);
+    color: var(--link-color);
 }
 
 /* Subseiten-Hero: hell im Light Mode */
@@ -2580,6 +2619,12 @@ body.dark-mode .member p {
         margin-bottom: 6px;
     }
 
+    .team-photo-wrap {
+        width: 92px;
+        height: 92px;
+        margin-bottom: 6px;
+    }
+
     .member p {
         font-size: 0.8rem;
         margin: 0;
@@ -2844,6 +2889,12 @@ body.dark-mode .member p {
         margin-bottom: 4px;
     }
 
+    .team-photo-wrap {
+        width: 82px;
+        height: 82px;
+        margin-bottom: 4px;
+    }
+
     .member p {
         font-size: 0.75rem;
     }
@@ -3063,6 +3114,12 @@ body.dark-mode .member p {
 
     .avatar {
         font-size: 1.8rem;
+        margin-bottom: 3px;
+    }
+
+    .team-photo-wrap {
+        width: 74px;
+        height: 74px;
         margin-bottom: 3px;
     }
 
@@ -4008,4 +4065,97 @@ body.dark-mode .member p {
         font-size: 0.85rem !important;
     }
 }
+
+/* ============================================
+   Page Transition Overlay
+   ============================================ */
+#page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f0f2f5;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+}
+
+body.dark-mode #page-transition-overlay {
+    background: #1a202c;
+}
+
+#page-transition-overlay.fade-out {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+body.page-loading {
+    animation: fadeIn 0.5s ease 0.3s forwards;
+}
+
+/* Keep the brand button consistently in the top-left on all pages */
+.navbar .logo {
+    margin-right: auto;
+    width: fit-content;
+    max-width: 100%;
+    font-size: 1.45rem;
+    padding: 8px 14px;
+}
+
+.logo a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.25em;
+}
+
+@media (max-width: 768px) {
+    .navbar .container,
+    .container.navbar-content {
+        align-items: center;
+    }
+
+    .navbar .logo {
+        flex: 0 1 auto !important;
+        margin-right: auto !important;
+        max-width: calc(100% - 120px);
+        font-size: 1.05rem !important;
+        padding: 6px 10px !important;
+    }
+
+    .navbar .logo a {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .search-btn {
+        font-size: 0.88rem;
+        padding: 0 10px;
+        min-width: 44px;
+        height: 44px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar .logo {
+        max-width: calc(100% - 100px);
+        font-size: 0.95rem !important;
+        padding: 5px 8px !important;
+    }
+
+    .search-btn {
+        font-size: 0.84rem;
+        padding: 0 8px;
+    }
 }

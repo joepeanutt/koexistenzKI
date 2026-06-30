@@ -15,7 +15,7 @@ const DEMO_ARTICLES = [
     description: "Neue Studien zeigen, dass KI-Technologien 25 Millionen neue Jobs schaffen werden, während gleichzeitig 85 Millionen verschwinden könnten.",
     content: "Eine neue Analyse von McKinsey Global Institute zeigt, dass Künstliche Intelligenz die globale Arbeitswelt tiefgreifend verändern wird.",
     url: "https://example.com/ai-jobs",
-    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%232b6cb0' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E🤖 KI und Arbeit%3C/text%3E%3C/svg%3E",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%232b6cb0' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3EKI und Arbeit%3C/text%3E%3C/svg%3E",
     source: { id: "ai-news", name: "KI News" },
     publishedAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
     author: "Tech-Redaktion"
@@ -25,7 +25,7 @@ const DEMO_ARTICLES = [
     description: "OpenAI meldet einen Meilenstein: ChatGPT ist die schnellest wachsende Anwendung aller Zeiten.",
     content: "Die KI-Anwendung ChatGPT hat in Rekordzeit 100 Millionen Nutzer erreicht.",
     url: "https://example.com/chatgpt-milestone",
-    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%2310a37f' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E💬 ChatGPT%3C/text%3E%3C/svg%3E",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%2310a37f' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3EChatGPT%3C/text%3E%3C/svg%3E",
     source: { id: "openai", name: "OpenAI" },
     publishedAt: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
     author: "KI-Experte"
@@ -45,7 +45,7 @@ const DEMO_ARTICLES = [
     description: "Künstliche Intelligenz hilft dabei, 3D-Strukturen von Proteinen zu bestimmen. Ein großer Durchbruch für die Biologie.",
     content: "AlphaFold2 ist ein Meilenstein in der Biomolekularen Forschung.",
     url: "https://example.com/alphafold",
-    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%234285f4' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E🧬 AlphaFold%3C/text%3E%3C/svg%3E",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%234285f4' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3EAlphaFold%3C/text%3E%3C/svg%3E",
     source: { id: "deepmind", name: "Google DeepMind" },
     publishedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
     author: "Wissenschaft"
@@ -55,7 +55,7 @@ const DEMO_ARTICLES = [
     description: "Gesichtserkennung und KI-basierte Videoüberwachung werden immer häufiger eingesetzt. Experten warnen vor Datenschutzrisiken.",
     content: "Die Verwendung von KI für Überwachungszwecke wird kontrovers diskutiert.",
     url: "https://example.com/ai-surveillance",
-    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%23d32f2f' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E📹 Überwachung%3C/text%3E%3C/svg%3E",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%23d32f2f' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3EÜberwachung%3C/text%3E%3C/svg%3E",
     source: { id: "privacy", name: "Datenschutz News" },
     publishedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
     author: "Datenschutz-Experte"
@@ -65,7 +65,7 @@ const DEMO_ARTICLES = [
     description: "Adaptive Lernsysteme mit KI helfen Schülern, schneller und effizienter zu lernen. Schulen experimentieren mit neuen Technologien.",
     content: "Künstliche Intelligenz revolutioniert das Bildungssystem.",
     url: "https://example.com/ai-education",
-    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%239c27b0' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E🎓 Bildung%3C/text%3E%3C/svg%3E",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%239c27b0' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3EBildung%3C/text%3E%3C/svg%3E",
     source: { id: "education", name: "Bildungs-News" },
     publishedAt: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000).toISOString(),
     author: "Bildungsexperte"
@@ -75,7 +75,7 @@ const DEMO_ARTICLES = [
     description: "Künstliche Intelligenz wird genutzt, um Klimamuster vorherzusagen und Energie zu sparen.",
     content: "KI spielt eine wichtige Rolle im Kampf gegen den Klimawandel.",
     url: "https://example.com/ai-climate",
-    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%2300897b' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E🌍 Klima%3C/text%3E%3C/svg%3E",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%2300897b' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3EKlima%3C/text%3E%3C/svg%3E",
     source: { id: "climate", name: "Klima News" },
     publishedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
     author: "Umweltjournalist"
@@ -95,7 +95,7 @@ const DEMO_ARTICLES = [
     description: "Intelligente Roboter werden in Fabriken, Lagern und Hospitals eingesetzt. Die Automatisierung nimmt zu.",
     content: "KI-gesteuerte Roboter verändern die Industrie.",
     url: "https://example.com/ai-robotics",
-    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%23fbc02d' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3E🤖 Robotik%3C/text%3E%3C/svg%3E",
+    urlToImage: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%23fbc02d' width='800' height='450'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle'%3ERobotik%3C/text%3E%3C/svg%3E",
     source: { id: "robotics", name: "Robotik News" },
     publishedAt: new Date(Date.now() - 9 * 24 * 60 * 60 * 1000).toISOString(),
     author: "Technologie-Reporter"

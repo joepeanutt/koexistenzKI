@@ -43,7 +43,7 @@ async function sendChatMessage() {
   const typing = document.createElement("div");
   typing.className = "chat-message bot typing";
   typing.id = "typing-indicator";
-  typing.innerHTML = "<span>⏳ Schreibt...</span>";
+  typing.innerHTML = "<span>Antwort wird erstellt...</span>";
   document.getElementById("chatbot-messages").appendChild(typing);
   scrollChat();
 
@@ -62,7 +62,7 @@ async function sendChatMessage() {
 
   } catch (error) {
     document.getElementById("typing-indicator")?.remove();
-    addChatMessage("❌ Verbindungsfehler. Bitte versuche es erneut.", "bot");
+    addChatMessage("Verbindungsfehler. Bitte versuche es erneut.", "bot");
   }
 }
 
