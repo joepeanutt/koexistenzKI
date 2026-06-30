@@ -283,23 +283,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Hamburger Menu Toggle
 document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.getElementById('hamburger');
+    const navRight = document.querySelector('.nav-right');
+    let hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('nav-links');
     const dropdown = document.getElementById('dropdown');
     const dropdownTrigger = dropdown ? dropdown.querySelector('.dropdown-trigger') : null;
     const dropdownMenu = dropdown ? dropdown.querySelector('.dropdown-menu') : null;
 
-    if (hamburger) {
+    if (!hamburger && navRight && navLinks) {
+        hamburger = document.createElement('button');
+        hamburger.type = 'button';
+        hamburger.className = 'hamburger';
+        hamburger.id = 'hamburger';
+        hamburger.setAttribute('aria-label', 'Menü öffnen/schließen');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.innerHTML = '<span></span><span></span><span></span>';
+        navRight.appendChild(hamburger);
+    }
+
+    if (hamburger && navLinks) {
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             hamburger.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', navLinks.classList.contains('active') ? 'true' : 'false');
         });
     }
 
     // Dropdown für Mobilgeräte
     if (dropdownTrigger) {
         dropdownTrigger.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 1024) {
                 e.preventDefault();
                 dropdown.classList.toggle('active');
             }
@@ -309,16 +322,47 @@ document.addEventListener('DOMContentLoaded', () => {
     if (dropdownMenu) {
         dropdownMenu.querySelectorAll('a').forEach((anchor) => {
             anchor.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
+                if (window.innerWidth <= 1024) {
                     dropdown.classList.remove('active');
                     navLinks.classList.remove('active');
                     if (hamburger) {
                         hamburger.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
                     }
                 }
             });
         });
     }
+
+    if (navLinks) {
+        navLinks.querySelectorAll('a').forEach((anchor) => {
+            anchor.addEventListener('click', () => {
+                if (window.innerWidth <= 1024) {
+                    navLinks.classList.remove('active');
+                    if (dropdown) {
+                        dropdown.classList.remove('active');
+                    }
+                    if (hamburger) {
+                        hamburger.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+        });
+    }
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 1024 && navLinks) {
+            navLinks.classList.remove('active');
+            if (dropdown) {
+                dropdown.classList.remove('active');
+            }
+            if (hamburger) {
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+        }
+    });
 });
 
 // Aktiven Navigationspunkt markieren
