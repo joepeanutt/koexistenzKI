@@ -976,8 +976,12 @@ body.dark-mode .dark-mode-toggle:hover {
     object-position: 50% 25%;
 }
 
+.team-photo-henrik {
+    transform: scale(1);
+}
+
 .team-photo-joel {
-    object-position: 50% 24%;
+    object-position: 50% 33%;
 }
 
 .avatar:hover {
